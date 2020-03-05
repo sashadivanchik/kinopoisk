@@ -1,0 +1,8 @@
+@import '../../common/variables.scss';
+
+.main-page {
+    &__title {
+        font-size: 20px;
+        font-family: $primaryFont;
+    }
+}

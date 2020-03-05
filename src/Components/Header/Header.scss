@@ -1,0 +1,9 @@
+@import '../../common/variables.scss';
+
+.header {
+    &__title {
+        margin: 0;
+        font-size: 30px;
+        font-family: $primaryFont;
+    }
+}

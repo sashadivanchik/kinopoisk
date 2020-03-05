@@ -1,0 +1,8 @@
+@import '../../common/variables.scss';
+
+.popular-page {
+    &__title {
+        font-size: 20px;
+        font-family: $primaryFont;
+    }
+}
