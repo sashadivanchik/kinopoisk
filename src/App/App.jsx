@@ -18,13 +18,10 @@ import './App.scss';
 import { fetchMovies } from '../API/fetchMovies';
 
 class App extends React.Component {
-    constructor(props) {
-        super(props);
-        this.state = {
-            popularMovies: [],
-            upcomingMovies: []
-        };
-    }
+    state = {
+        popularMovies: [],
+        upcomingMovies: []
+    };
 
     componentDidMount() {
         const urlPopular = `https://api.themoviedb.org/3/movie/popular?api_key=84ecb8320b91dea5c8ff7bc8404b9b0c`;
@@ -52,10 +49,7 @@ class App extends React.Component {
     };
 
     render() {
-        const popularMovies = this.state
-            .popularMovies;
-        const upcomingMovies = this.state
-            .upcomingMovies;
+        const {popularMovies, upcomingMovies} = this.state;
         return (
             <div className='app'>
                 <Header />
