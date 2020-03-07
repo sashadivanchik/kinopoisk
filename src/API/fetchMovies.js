@@ -1,6 +1,10 @@
-export const fetchMovies = (url, func) => {
-    fetch(url)
+export const fetchMovies = (url, func) => {  
+    try {
+        fetch(url)
         .then(response => response.json())
         .then(data => func(data))
-        .catch(err => console.log(err, 'error'));
+    } catch (error) {
+        console.log(error.name)
+        console.log(error.message)
+    }        
 };
