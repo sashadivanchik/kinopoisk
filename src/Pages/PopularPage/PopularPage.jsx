@@ -2,31 +2,8 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 import './PopularPage.scss';
+import { CreateList } from '../../Components/CreateList/CreateList';
 class PopularPage extends React.Component {
-    createList = movies => {
-        const path =
-            'https://image.tmdb.org/t/p/w500';
-        return (
-            <ul className='popular-page__list'>
-                {movies.map(item => (
-                    <li
-                        className='popular-page__item'
-                        key={item.id}
-                    >
-                        <img
-                            className='popular-page__image'
-                            src={`${path}${item.poster_path}`}
-                            alt='баннер'
-                        />
-                        <h1 className='popular-page__movie-title'>
-                            {item.title}
-                        </h1>
-                    </li>
-                ))}
-            </ul>
-        );
-    };
-
     render() {
         const { movies } = this.props;
         return (
@@ -35,10 +12,7 @@ class PopularPage extends React.Component {
                     Популярное
                 </h1>
                 <div className='popular-page__container'>
-                    {movies.length > 0 &&
-                        this.createList(
-                            movies[0].results
-                        )}
+                    {movies.length > 0 && <CreateList movies={movies[0].results} namePage={'popular-page'} />}
                 </div>
             </div>
         );

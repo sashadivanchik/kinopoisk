@@ -2,6 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 import './SoonPage.scss';
+import { CreateList } from '../../Components/CreateList/CreateList';
 
 class SoonPage extends React.Component {
     createList = movies => {
@@ -35,10 +36,7 @@ class SoonPage extends React.Component {
                     Скоро в кинотеатрах
                 </h1>
                 <div className='soon-page__container'>
-                    {movies.length > 0 &&
-                        this.createList(
-                            movies[0].results
-                        )}
+                {movies.length > 0 && <CreateList movies={movies[0].results} namePage={'soon-page'} />}
                 </div>
             </div>
         );
