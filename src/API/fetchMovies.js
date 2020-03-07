@@ -1,10 +1,13 @@
 export const fetchMovies = (url, func) => {  
-    try {
-        fetch(url)
-        .then(response => response.json())
-        .then(data => func(data))
-    } catch (error) {
-        console.log(error.name)
-        console.log(error.message)
-    }        
+    fetch(url)
+        .then(response => {
+            try {
+                const parseResponce = response.json();
+                return parseResponce;
+            } catch (error) {
+                console.error(error);
+            }
+        })
+            .then(data => func(data))
+            .catch(err => console.error(err, 'error'));
 };
