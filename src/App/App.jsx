@@ -44,25 +44,19 @@ class App extends React.Component {
         const urlUpcoming = `https://api.themoviedb.org/3/movie/upcoming?api_key=84ecb8320b91dea5c8ff7bc8404b9b0c`;
         fetchMovies(
             urlPopular,
-            this.addPopularMovies
+            'popularMovies',
+            this.receiveMovies
         );
         fetchMovies(
             urlUpcoming,
-            this.addUpcomingMovies
+            'upcomingMovies',
+            this.receiveMovies
         );
     }
 
-    addPopularMovies = data => {
-        this.setState({
-            popularMovies: [data]
-        });
-    };
-
-    addUpcomingMovies = data => {
-        this.setState({
-            upcomingMovies: [data]
-        });
-    };
+    receiveMovies = (moviesType, movies) => {
+        this.setState({[moviesType]: [movies]})
+    }; 
 
     render() {
         const {popularMovies, upcomingMovies, viewedMovies} = this.state;
