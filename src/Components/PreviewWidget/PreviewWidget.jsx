@@ -9,7 +9,7 @@ import './PreviewWidget.scss';
 export const PreviewWidget = props => {   
     const renderList = () => {
         const movies = sawArray(props.movies, 0, 6);
-        if(movies.lenght) {
+        if(movies.length) {
             return (
                 <CreateList movies={movies} namePage={'preview-widget'} />
             )

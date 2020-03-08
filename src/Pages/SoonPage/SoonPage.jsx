@@ -9,7 +9,7 @@ import './SoonPage.scss';
 class SoonPage extends React.Component {
     renderSoonList = () => {
         const { movies } = this.props;
-        if(movies.lenght) {
+        if(movies.length) {
             return (
                 <CreateList movies={movies[0].results} namePage={'popular-page'} />
             );
