@@ -11,7 +11,7 @@ class SoonPage extends React.Component {
         const { movies } = this.props;
         if(movies.length) {
             return (
-                <CreateList movies={movies[0].results} namePage={'popular-page'} />
+                <CreateList movies={movies[0].results} namePage={'soon-page'} />
             );
         }
         return null;
@@ -23,7 +23,7 @@ class SoonPage extends React.Component {
                     Скоро в кинотеатрах
                 </h1>
                 <div className='soon-page__container'>
-                {this.renderSoonList()}
+                    {this.renderSoonList()}
                 </div>
             </div>
         );
