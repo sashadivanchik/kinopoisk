@@ -1,11 +1,13 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-import './PreviewWidget.scss';
 import { CreateList } from '../CreateList/CreateList';
+import { sawArray } from '../../utils/sawArray';
+
+import './PreviewWidget.scss';
 
 export const PreviewWidget = props => {
-    const movies = props.movies.slice(0, 6);
+    const movies = sawArray(props.movies, 0, 6)
     return (
         <div className='preview-widget'>
             <h1 className='preview-widget__title'>

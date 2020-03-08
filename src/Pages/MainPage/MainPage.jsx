@@ -2,50 +2,56 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 import { PreviewWidget } from '../../Components/PreviewWidget/PreviewWidget';
-
-import joker from '../../static/images/Joker.jpg';
-import dunkirk from '../../static/images/Dunkirk.jpg';
-import bladeRunner from '../../static/images/Blade-Runner-2049.jpg';
-import replicas from '../../static/images/Replicas.jpg';
-import serenity from '../../static/images/Serenity.jpg';
-import assasin from '../../static/images/Assasin.jpg';
+import { ListError } from '../../Components/Errors/Erorr';
 
 import './MainPage.scss';
-
-const movies1 = [
-    { src: joker, id: 1 },
-    { src: dunkirk, id: 2 },
-    { src: bladeRunner, id: 3 },
-    { src: replicas, id: 4 },
-    { src: serenity, id: 5 },
-    { src: assasin, id: 6 }
-];
-
 class MainPage extends React.Component {
+
+    renderPopularWidget = () => {
+        const { popular } = this.props
+        if (popular.length) {
+            return (
+                <PreviewWidget 
+                    title={'Популярное'} 
+                    movies={popular[0].results} 
+                />
+            );
+        }
+        return <ListError text={'Массив пуст'} />
+    };
+
+    renderUpcomingWidget = () => {
+        const { upcoming } = this.props
+        if (upcoming.length) {
+            return (
+                <PreviewWidget 
+                    title={'Скоро в кинотеартах'} 
+                    movies={upcoming[0].results} 
+                />
+            );
+        }
+        return <ListError text={'Массив пуст'} />
+    };
+
+    renderViewedWidget = () => { 
+        const { viewed } = this.props;    
+        if (viewed.length) {
+            return (
+                <PreviewWidget 
+                    title={'Просмотренные'} 
+                    movies={viewed} 
+                />
+            );
+        }
+        return <ListError text={'Массив пуст'} />
+    };
+
     render() {
-        const { popular, upcoming } = this.props;
         return (
             <div className='main-page'>
-                {popular.length > 0 && (
-                    <PreviewWidget
-                        title={'Популярное'}
-                        movies={
-                            popular[0].results
-                        }
-                    />
-                )}
-                {upcoming.length > 0 && (
-                    <PreviewWidget
-                        title={'Скоро в кино'}
-                        movies={
-                            upcoming[0].results
-                        }
-                    />
-                )}
-                <PreviewWidget
-                    title={'Просмотренные'}
-                    movies={movies1}
-                />
+                {this.renderPopularWidget()} 
+                {this.renderUpcomingWidget()}
+                {this.renderViewedWidget()}
             </div>
         );
     }
@@ -70,6 +76,12 @@ MainPage.propTypes = {
             total_results: PropTypes.number,
             total_pages: PropTypes.number,
             results: PropTypes.arrayOf
+        })
+    ),
+    viewed: PropTypes.arrayOf(
+        PropTypes.shape({
+            src: PropTypes.string,
+            id: PropTypes.id
         })
     ),
     results: PropTypes.arrayOf(

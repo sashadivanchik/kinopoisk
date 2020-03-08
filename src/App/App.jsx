@@ -14,13 +14,29 @@ import SoonPage from '../Pages/SoonPage';
 import ViewedPage from '../Pages/ViewedPage';
 import Header from '../Components/Header';
 
-import './App.scss';
 import { fetchMovies } from '../API/fetchMovies';
 
+import joker from '../static/images/Joker.jpg';
+import dunkirk from '../static/images/Dunkirk.jpg';
+import bladeRunner from '../static/images/Blade-Runner-2049.jpg';
+import replicas from '../static/images/Replicas.jpg';
+import serenity from '../static/images/Serenity.jpg';
+import assasin from '../static/images/Assasin.jpg';
+
+
+import './App.scss';
 class App extends React.Component {
     state = {
         popularMovies: [],
-        upcomingMovies: []
+        upcomingMovies: [],
+        viewedMovies: [
+                { src: joker, id: 1 },
+                { src: dunkirk, id: 2 },
+                { src: bladeRunner, id: 3 },
+                { src: replicas, id: 4 },
+                { src: serenity, id: 5 },
+                { src: assasin, id: 6 }
+        ]
     };
 
     componentDidMount() {
@@ -49,7 +65,7 @@ class App extends React.Component {
     };
 
     render() {
-        const {popularMovies, upcomingMovies} = this.state;
+        const {popularMovies, upcomingMovies, viewedMovies} = this.state;
         return (
             <div className='app'>
                 <Header />
@@ -64,6 +80,9 @@ class App extends React.Component {
                             }
                             upcoming={
                                 upcomingMovies
+                            }
+                            viewed={
+                                viewedMovies
                             }
                         />
                     </Route>
