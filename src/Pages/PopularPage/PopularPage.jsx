@@ -4,15 +4,26 @@ import PropTypes from 'prop-types';
 import './PopularPage.scss';
 import { CreateList } from '../../Components/CreateList/CreateList';
 class PopularPage extends React.Component {
-    render() {
+
+    renderPopularList = () => {
         const { movies } = this.props;
+        if(movies.lenght) {
+            return (
+                <CreateList movies={movies[0].results} namePage={'popular-page'} />
+            );
+        }
+        return null;
+    };
+
+
+    render() {       
         return (
             <div className='popular-page'>
                 <h1 className='popular-page__title'>
                     Популярное
                 </h1>
                 <div className='popular-page__container'>
-                    {movies.length > 0 && <CreateList movies={movies[0].results} namePage={'popular-page'} />}
+                    {this.renderPopularList()}
                 </div>
             </div>
         );
