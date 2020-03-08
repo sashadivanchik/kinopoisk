@@ -2,7 +2,6 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 import { PreviewWidget } from '../../Components/PreviewWidget/PreviewWidget';
-import { ListError } from '../../Components/Errors/Erorr';
 
 import './MainPage.scss';
 class MainPage extends React.Component {
@@ -17,7 +16,7 @@ class MainPage extends React.Component {
                 />
             );
         }
-        return <ListError text={'Массив пуст'} />
+        return null;
     };
 
     renderUpcomingWidget = () => {
@@ -30,7 +29,7 @@ class MainPage extends React.Component {
                 />
             );
         }
-        return <ListError text={'Массив пуст'} />
+        return null;
     };
 
     renderViewedWidget = () => { 
@@ -43,7 +42,7 @@ class MainPage extends React.Component {
                 />
             );
         }
-        return <ListError text={'Массив пуст'} />
+        return null;
     };
 
     render() {
