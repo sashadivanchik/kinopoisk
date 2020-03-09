@@ -4,6 +4,7 @@ import PropTypes from 'prop-types';
 import { CreateList } from '../../Components/CreateList/CreateList';
 
 import './SoonPage.scss';
+import { Error } from '../../Components/Errors/Erorr';
 
 
 class SoonPage extends React.Component {
@@ -14,7 +15,7 @@ class SoonPage extends React.Component {
                 <CreateList movies={movies} namePage={'soon-page'} />
             );
         }
-        return null;
+        return <Error text={'Массив фильмов пуст'} />;
     };
     render() {
         return (

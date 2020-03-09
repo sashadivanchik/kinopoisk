@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 
 import './PopularPage.scss';
 import { CreateList } from '../../Components/CreateList/CreateList';
+import { Error } from '../../Components/Errors/Erorr';
 class PopularPage extends React.Component {
 
     renderPopularList = () => {
@@ -12,9 +13,8 @@ class PopularPage extends React.Component {
                 <CreateList movies={movies} namePage={'popular-page'} />
             );
         }
-        return null;
+        return <Error text={'Массив фильмов пуст'} />;
     };
-
 
     render() {       
         return (
