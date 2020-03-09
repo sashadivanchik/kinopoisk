@@ -2,19 +2,24 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 import { CreateList } from '../CreateList/CreateList';
-import { sawArray } from '../../utils/sawArray';
+import { Error } from '../Errors/Erorr';
 
 import './PreviewWidget.scss';
 
 export const PreviewWidget = props => {   
+    const sliceArray = (start, end) => {
+        const { movies } = props;
+        return movies.slice(start, end);
+    };
+
     const renderList = () => {
-        const movies = sawArray(props.movies, 0, 6);
+        const movies = sliceArray(0, 6);
         if(movies.length) {
             return (
                 <CreateList movies={movies} namePage={'preview-widget'} />
             )
         }
-        return null;
+        return <Error text={'Массив фильмов пуст'} />;
     };
     return (
         <div className='preview-widget'>

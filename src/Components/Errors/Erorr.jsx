@@ -3,12 +3,12 @@ import PropTypes from 'prop-types';
 
 import './Error.scss';
 
-export const ListError = ({text}) => {
+export const Error = ({text}) => {
     return (
         <p className={'title'} >{text}</p>
     );
 };
 
-ListError.propTypes = {
+Error.propTypes = {
     text: PropTypes.string,
 };
