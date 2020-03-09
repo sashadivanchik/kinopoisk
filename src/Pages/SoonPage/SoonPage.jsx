@@ -11,7 +11,7 @@ class SoonPage extends React.Component {
         const { movies } = this.props;
         if(movies.length) {
             return (
-                <CreateList movies={movies[0].results} namePage={'soon-page'} />
+                <CreateList movies={movies} namePage={'soon-page'} />
             );
         }
         return null;

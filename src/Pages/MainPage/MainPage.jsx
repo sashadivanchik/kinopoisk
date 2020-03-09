@@ -12,7 +12,7 @@ class MainPage extends React.Component {
             return (
                 <PreviewWidget 
                     title={'Популярное'} 
-                    movies={popular[0].results} 
+                    movies={popular} 
                 />
             );
         }
@@ -25,7 +25,7 @@ class MainPage extends React.Component {
             return (
                 <PreviewWidget 
                     title={'Скоро в кинотеартах'} 
-                    movies={upcoming[0].results} 
+                    movies={upcoming} 
                 />
             );
         }

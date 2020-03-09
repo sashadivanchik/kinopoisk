@@ -9,7 +9,7 @@ class PopularPage extends React.Component {
         const { movies } = this.props;
         if(movies.length) {
             return (
-                <CreateList movies={movies[0].results} namePage={'popular-page'} />
+                <CreateList movies={movies} namePage={'popular-page'} />
             );
         }
         return null;

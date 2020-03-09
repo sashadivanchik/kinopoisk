@@ -1,4 +1,4 @@
-export const fetchMovies = (url, type, func) => {  
+export const fetchMovies = (url) => (
     fetch(url)
         .then(response => {
             try {
@@ -8,6 +8,5 @@ export const fetchMovies = (url, type, func) => {
                 console.error(error);
             }
         })
-            .then(data => func(type, data))
-            .catch(err => console.error(err, 'error'));
-};
+        .catch(err => console.error(err, 'error'))
+);
