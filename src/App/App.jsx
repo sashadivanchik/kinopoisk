@@ -40,12 +40,11 @@ class App extends React.Component {
     };
 
     componentDidMount() {
-        const urlPopular = `https://api.themoviedb.org/3/movie/popular?api_key=84ecb8320b91dea5c8ff7bc8404b9b0c`;
-        const urlUpcoming = `https://api.themoviedb.org/3/movie/upcoming?api_key=84ecb8320b91dea5c8ff7bc8404b9b0c`;
-        fetchMovies(urlPopular)
-            .then(data => this.receiveMovies('popularMovies', data.results))
-        fetchMovies(urlUpcoming)
-            .then(data => this.receiveMovies('upcomingMovies', data.results))
+        let types = ['popular', 'upcoming'];
+        let funcs = ['popularMovies', 'upcomingMovies'];
+        
+        fetchMovies(types)
+            .then(moviesTypes => funcs.forEach((func, index) => this.receiveMovies(func, moviesTypes[index].results)));
     }
 
     receiveMovies = (moviesType, movies) => {
