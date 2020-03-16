@@ -1,5 +1,6 @@
-export const fetchMovies = (types) => {
-    let requests = types.map(
+export const fetchMovies = () => {
+    const types = ['popular', 'upcoming'];
+    const requests = types.map(
         type => fetch(`https://api.themoviedb.org/3/movie/${type}?api_key=84ecb8320b91dea5c8ff7bc8404b9b0c`)
     );
 
