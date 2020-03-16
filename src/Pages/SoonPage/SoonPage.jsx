@@ -15,7 +15,7 @@ class SoonPage extends React.Component {
                 <CreateList movies={movies} namePage={'soon-page'} />
             );
         }
-        return <Error text={'Массив фильмов пуст'} />;
+        return <Error text='Массив фильмов пуст' />;
     };
     render() {
         return (

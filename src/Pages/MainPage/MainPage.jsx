@@ -11,7 +11,7 @@ class MainPage extends React.Component {
         if (popular.length) {
             return (
                 <PreviewWidget 
-                    title={'Популярное'} 
+                    title='Популярное'
                     movies={popular} 
                 />
             );
@@ -24,7 +24,7 @@ class MainPage extends React.Component {
         if (upcoming.length) {
             return (
                 <PreviewWidget 
-                    title={'Скоро в кинотеартах'} 
+                    title='Скоро в кинотеартах' 
                     movies={upcoming} 
                 />
             );
@@ -37,7 +37,7 @@ class MainPage extends React.Component {
         if (viewed.length) {
             return (
                 <PreviewWidget 
-                    title={'Просмотренные'} 
+                    title='Просмотренные' 
                     movies={viewed} 
                 />
             );

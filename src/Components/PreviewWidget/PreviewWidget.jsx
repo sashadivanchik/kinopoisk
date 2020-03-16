@@ -14,12 +14,12 @@ export const PreviewWidget = props => {
 
     const renderList = () => {
         const movies = sliceArray(0, 6);
-        if(movies.length) {
-            return (
-                <CreateList movies={movies} namePage={'preview-widget'} />
-            )
-        }
-        return <Error text={'Массив фильмов пуст'} />;
+            if(movies.length) {
+                return (
+                    <CreateList movies={movies} namePage={'preview-widget'} />
+                )
+            }
+        return <Error text='Массив фильмов пуст' />;
     };
     return (
         <div className='preview-widget'>

@@ -13,7 +13,7 @@ class PopularPage extends React.Component {
                 <CreateList movies={movies} namePage={'popular-page'} />
             );
         }
-        return <Error text={'Массив фильмов пуст'} />;
+        return <Error text='Массив фильмов пуст' />;
     };
 
     render() {       

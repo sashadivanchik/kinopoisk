@@ -64,15 +64,9 @@ class App extends React.Component {
                         exact={true}
                     >
                         <MainPage
-                            popular={
-                                popularMovies
-                            }
-                            upcoming={
-                                upcomingMovies
-                            }
-                            viewed={
-                                viewedMovies
-                            }
+                            popular={popularMovies}
+                            upcoming={upcomingMovies}
+                            viewed={viewedMovies}
                         />
                     </Route>
                     <Route path={PAGE_POPULAR}>
