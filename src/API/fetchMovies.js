@@ -12,4 +12,5 @@ export const fetchMovies = (types) => {
                 console.error(error);
             }
         })))
+        .catch(err => console.error(err, 'error'))
     };
