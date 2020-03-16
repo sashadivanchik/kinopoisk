@@ -40,10 +40,10 @@ class App extends React.Component {
     };
 
     componentDidMount() {
-        let funcs = ['popularMovies', 'upcomingMovies'];
+        const loadDataFunctions = ['popularMovies', 'upcomingMovies'];
         
         fetchMovies()
-            .then(moviesTypes => funcs.forEach((func, index) => {
+            .then(moviesTypes => loadDataFunctions.forEach((func, index) => {
                 const { results } = moviesTypes[index];
                 this.receiveMovies(func, results)}
             ));
