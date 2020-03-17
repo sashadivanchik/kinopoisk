@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-import { CreateList } from '../CreateList/CreateList';
+import { RenderList } from '../RenderList/RenderList';
 import { Error } from '../Errors/Erorr';
 
 import './PreviewWidget.scss';
@@ -14,9 +14,9 @@ export const PreviewWidget = props => {
 
     const renderList = () => {
         const movies = sliceArray(0, 6);
-            if(movies.length) {
+            if (movies.length) {
                 return (
-                    <CreateList movies={movies} namePage={'preview-widget'} />
+                    <RenderList movies={movies} namePage={'preview-widget'} />
                 )
             }
         return <Error text='Массив фильмов пуст' />;
