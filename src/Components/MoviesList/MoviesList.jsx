@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import './MoviesList.scss';
 
 export const MoviesList = ({movies}) => {
-    const renderList = (movies) => {
+    const renderList = () => {
         const path =
             'https://image.tmdb.org/t/p/w500';
         return movies.map(item => (
