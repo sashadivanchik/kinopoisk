@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 import './PopularPage.scss';
-import { RenderList } from '../../Components/RenderList/RenderList';
+import { MoviesList } from '../../Components/MoviesList/MoviesList';
 import { Error } from '../../Components/Errors/Erorr';
 class PopularPage extends React.Component {
 
@@ -10,7 +10,7 @@ class PopularPage extends React.Component {
         const { movies } = this.props;
         if (movies.length) {
             return (
-                <RenderList movies={movies} namePage={'popular-page'} />
+                <MoviesList movies={movies} namePage={'popular-page'} />
             );
         }
         return <Error text='Массив фильмов пуст' />;

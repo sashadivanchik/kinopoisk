@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-export const RenderList = ({movies, namePage}) => {
+export const MoviesList = ({movies, namePage}) => {
     const renderList = (movies, namePage) => {
         const path =
             'https://image.tmdb.org/t/p/w500';
@@ -31,7 +31,7 @@ export const RenderList = ({movies, namePage}) => {
     )
 };
 
-RenderList.propTypes = {
+MoviesList.propTypes = {
     movies: PropTypes.arrayOf(
         PropTypes.shape({
             page: PropTypes.number,

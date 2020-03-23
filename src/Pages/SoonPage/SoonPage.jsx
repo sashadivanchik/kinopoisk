@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-import { RenderList } from '../../Components/RenderList/RenderList';
+import { MoviesList } from '../../Components/MoviesList/MoviesList';
 
 import './SoonPage.scss';
 import { Error } from '../../Components/Errors/Erorr';
@@ -12,7 +12,7 @@ class SoonPage extends React.Component {
         const { movies } = this.props;
         if (movies.length) {
             return (
-                <RenderList movies={movies} namePage={'soon-page'} />
+                <MoviesList movies={movies} namePage={'soon-page'} />
             );
         }
         return <Error text='Массив фильмов пуст' />;
