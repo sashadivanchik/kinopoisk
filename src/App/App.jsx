@@ -40,6 +40,10 @@ class App extends React.Component {
     };
 
     componentDidMount() {
+        this.getPopularAndUpcomingMoviesData();
+    }
+
+    getPopularAndUpcomingMoviesData = () => {
         const loadDataFunctions = ['popularMovies', 'upcomingMovies'];
         
         fetchMovies()
