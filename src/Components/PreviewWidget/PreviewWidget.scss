@@ -5,24 +5,4 @@
         font-size: 20px;
         font-family: $primaryFont;
     }
-
-    &__list {
-        padding: 0;
-        list-style: none;
-        display: grid;
-        grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr;
-        grid-template-rows: auto;
-        grid-column-gap: 15px;
-    }
-
-    &__image {
-        display: block;
-        width: 100%;
-        height: 300px;
-        margin: 0;
-    }
-
-    &__movie-title {
-        width: 200px;
-    }
 }

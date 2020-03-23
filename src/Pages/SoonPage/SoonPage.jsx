@@ -12,7 +12,7 @@ class SoonPage extends React.Component {
         const { movies } = this.props;
         if (movies.length) {
             return (
-                <MoviesList movies={movies} namePage={'soon-page'} />
+                <MoviesList movies={movies} />
             );
         }
         return <Error text='Массив фильмов пуст' />;

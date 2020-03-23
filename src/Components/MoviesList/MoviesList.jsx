@@ -1,32 +1,33 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import './MoviesList.scss';
 
-export const MoviesList = ({movies, namePage}) => {
-    const renderList = (movies, namePage) => {
+export const MoviesList = ({movies}) => {
+    const renderList = (movies) => {
         const path =
             'https://image.tmdb.org/t/p/w500';
         return movies.map(item => (
             <li
-                className={`${namePage}__item`}
+                className={'movies-list__item'}
                 key={item.id}
             >
                 <img
-                    className={`${namePage}__image`}
+                    className={'movies-list__image'}
                     src={
                         item.src ||
                         `${path}${item.poster_path}`
                     }
                     alt='баннер'
                 />
-                <h1 className={`${namePage}__movie-title`}>
+                <h1 className={'movies-list__title'}>
                     {item.title}
                 </h1>
             </li>
         ))
     }
     return (
-        <ul className={`${namePage}__list`}>
-                {renderList(movies, namePage)}
+        <ul className={'movies-list'}>
+                {renderList(movies)}
         </ul>
     )
 };

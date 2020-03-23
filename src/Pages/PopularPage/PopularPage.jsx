@@ -10,7 +10,7 @@ class PopularPage extends React.Component {
         const { movies } = this.props;
         if (movies.length) {
             return (
-                <MoviesList movies={movies} namePage={'popular-page'} />
+                <MoviesList movies={movies} />
             );
         }
         return <Error text='Массив фильмов пуст' />;

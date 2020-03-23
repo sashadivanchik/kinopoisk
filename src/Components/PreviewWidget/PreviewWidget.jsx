@@ -16,7 +16,7 @@ export const PreviewWidget = props => {
         const movies = sliceArray(0, 6);
             if (movies.length) {
                 return (
-                    <MoviesList movies={movies} namePage={'preview-widget'} />
+                    <MoviesList movies={movies} />
                 )
             }
         return <Error text='Массив фильмов пуст' />;
