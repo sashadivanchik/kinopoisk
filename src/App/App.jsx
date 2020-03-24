@@ -27,9 +27,9 @@ import assasin from '../static/images/Assasin.jpg';
 import './App.scss';
 class App extends React.Component {
     state = {
-        popularMovies: [],
-        upcomingMovies: [],
-        viewedMovies: [
+        popular: [],
+        upcoming: [],
+        viewed: [
                 { src: joker, id: 1 },
                 { src: dunkirk, id: 2 },
                 { src: bladeRunner, id: 3 },
@@ -44,10 +44,10 @@ class App extends React.Component {
     }
 
     getPopularAndUpcomingMoviesData = () => {
-        const loadDataFunctions = ['popularMovies', 'upcomingMovies'];
+        const types = ['popular', 'upcoming'];
         
-        fetchMovies()
-            .then(moviesTypes => loadDataFunctions.forEach((func, index) => {
+        fetchMovies(types)
+            .then(moviesTypes => types.forEach((func, index) => {
                 const { results } = moviesTypes[index];
                 this.receiveMovies(func, results)}
             ));
@@ -58,7 +58,7 @@ class App extends React.Component {
     }; 
 
     render() {
-        const {popularMovies, upcomingMovies, viewedMovies} = this.state;
+        const {popular, upcoming, viewed} = this.state;
         return (
             <div className='app'>
                 <Header />
@@ -68,21 +68,19 @@ class App extends React.Component {
                         exact={true}
                     >
                         <MainPage
-                            popular={popularMovies}
-                            upcoming={upcomingMovies}
-                            viewed={viewedMovies}
+                            popular={popular}
+                            upcoming={upcoming}
+                            viewed={viewed}
                         />
                     </Route>
                     <Route path={PAGE_POPULAR}>
                         <PopularPage
-                            movies={popularMovies}
+                            movies={popular}
                         />
                     </Route>
                     <Route path={PAGE_SOON}>
                         <SoonPage
-                            movies={
-                                upcomingMovies
-                            }
+                            movies={upcoming}
                         />
                     </Route>
                     <Route path={PAGE_VIEWED}>
