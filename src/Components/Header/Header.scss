@@ -1,6 +1,16 @@
 @import '../../common/variables.scss';
 
 .header {
+
+    padding-top: 30px;
+
+    &__container {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        position: relative;
+    }
+
     &__title {
         margin: 0;
         font-size: 30px;
