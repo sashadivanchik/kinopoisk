@@ -1,21 +1,32 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 
-const EnterModal = ({ children, show, setShow }) => {
-  const content = show && (
+const EnterModal = ({ children, setShow }) => {
+
+  const showEnterModal = () => setShow(false);
+
+  return (
     <div className='enter-modal'>
       <div className='enter-modal__container'>
         <button
           className='enter-modal__close'
           type='button'
-          onClick={() => setShow(false)}
+          onClick={showEnterModal}
         >
         </button>
-        <div className='enter-modal__body'>{children}</div>
+        <div 
+          className='enter-modal__body'
+        >
+          {children}
+        </div>
       </div>
     </div>
   )
-
-  return content
 }
 
 export default EnterModal;
+
+EnterModal.propTypes = {
+  children: PropTypes.element.isRequired,
+  setShow: PropTypes.func
+};

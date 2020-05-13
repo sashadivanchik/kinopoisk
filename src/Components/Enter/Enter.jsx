@@ -16,10 +16,14 @@ export const Enter = () => {
       >
         вход
       </button>
-      <EnterModal show={ show } setShow={setShow}>
-        <input type='text'/>
-        <input type='text'/>
-      </EnterModal>
+      { 
+        show && (
+        <EnterModal setShow={setShow}>
+          <input type='text'/>
+          <input type='text'/>
+        </EnterModal>
+        )
+      }
     </div>
   )
 }
