@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 
 const EnterModal = ({ children, setShow }) => {
 
-  const showEnterModal = () => setShow(false);
+  const closeEnterModal = () => setShow(false);
 
   return (
     <div className='enter-modal'>
@@ -11,7 +11,7 @@ const EnterModal = ({ children, setShow }) => {
         <button
           className='enter-modal__close'
           type='button'
-          onClick={showEnterModal}
+          onClick={closeEnterModal}
         >
         </button>
         <div 
