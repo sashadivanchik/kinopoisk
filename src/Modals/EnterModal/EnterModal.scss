@@ -1,0 +1,53 @@
+.enter-modal {
+  position: absolute;
+  top: 35px;
+  right: 0;
+  background: rgb(245, 244, 214);
+  border-radius: 4px;
+
+  &__container {
+    padding: 10px;
+    padding-top: 30px;
+  }
+
+  &__close {
+    position: absolute;
+    right: 0;
+    top: 5px;
+    width: 32px;
+    height: 23px;
+    opacity: 0.3;
+    border: none;
+    outline: none;
+    background: transparent;
+    cursor: pointer;
+
+    &:hover {
+      opacity: 1;
+    }
+
+    &:before, &:after {
+      position: absolute;
+      top: 0;
+      left: 15px;
+      content: ' ';
+      height: 23px;
+      width: 2px;
+      background-color: #333;
+    }
+
+    &:before {
+      transform: rotate(45deg);
+    }
+
+    &:after {
+      transform: rotate(-45deg);
+    }
+  }
+
+  &__body {
+    display: flex;
+    flex-direction: column;
+  }
+  
+}

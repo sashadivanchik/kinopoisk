@@ -1,0 +1,19 @@
+@import '../../common/variables.scss';
+
+.enter {
+  position: absolute;
+  right: 0;
+
+  &__open {
+    background: transparent;
+    border: 1px solid black;
+    border-radius: 2px;
+    outline: none;
+    cursor: pointer;
+    font-family: $primaryFont;
+
+    &:hover {
+      background: rgba(0, 0, 0, 0.1);
+    }
+  }
+}
