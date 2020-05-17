@@ -3,6 +3,7 @@ import EnterModal from '../../Modals/EnterModal';
 
 import '../../Modals/EnterModal/EnterModal.scss';
 import './Enter.scss';
+import { Registration } from '../Registration/Registration';
 
 export const Enter = () => {
 
@@ -19,8 +20,7 @@ export const Enter = () => {
       { 
         show && (
         <EnterModal setShow={setShow}>
-          <input type='text'/>
-          <input type='text'/>
+          <Registration />
         </EnterModal>
         )
       }
