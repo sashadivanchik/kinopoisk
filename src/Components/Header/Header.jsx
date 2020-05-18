@@ -2,7 +2,7 @@ import React from 'react';
 import { Navigation } from '../Navigation/Navigation';
 
 import './Header.scss';
-import { Enter } from '../Enter/Enter';
+import { EnterRegistration } from '../EnterRegistration/EnterRegistration';
 
 class Header extends React.Component {
     render() {
@@ -12,7 +12,7 @@ class Header extends React.Component {
                     <h1 className='header__title'>
                         Кинопоиск
                     </h1>
-                    <Enter />
+                    <EnterRegistration />
                 </div>
                 <Navigation />
             </div>

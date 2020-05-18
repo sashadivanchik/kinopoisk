@@ -1,7 +1,75 @@
+@import '../../common/variables.scss';
+
 .registration {
 
-    &__text-input {
-        outline: blue;
+    &__title {
+        font-family: $primaryFont;
+        font-size: 24px;
+        margin: 0;
+        margin-bottom: 15px;
+    }
+
+    &__form {
+        display: flex;
+        flex-direction: column;
+    }
+
+    &__label {
+        font-family: $primaryFont;
+    }
+
+    &__input {
+        font-family: $primaryFont;
+        outline: none;
         border: 1px solid black;
+        padding: 2px 0px 2px 4px;
+    }
+
+    &__error {
+        font-family: $primaryFont;
+        font-size: 14px;
+        color: red;
+        height: 22px;
+        display: flex;
+        align-items: center;
+    }
+
+    &__input.error {
+        border-color: red;
+        box-shadow: 0px 0px 5px 0px rgba(240,0,0,1);
+    }
+
+    &__input.valid {
+        border-color: rgba(210, 255, 82, 1);
+        box-shadow: 0px 0px 5px 0px rgba(0, 148, 52, 1);
+    }
+
+    &__submit-button {
+        cursor: pointer;
+        font-size: 10px;
+        text-transform: uppercase;
+        background: $defaultWhiteColor;
+        color: $defaultBlackColor;
+        text-decoration: none;
+        -webkit-border-radius: 2px;
+        -moz-border-radius: 2px;
+        border-radius: 2px;
+        text-align: center;
+        padding: 9px 13px 8px;
+        display: inline-block;
+        border: 1px solid $defaultBlackColor;
+        outline: none;
+        position: relative;
+        font-family: "Ubuntu", Arial, Helvetica, sans-serif;
+        letter-spacing: 0.4px;
+        width: auto;
+        vertical-align: middle;
+        margin-top: 15px;
+
+        &--active {
+            background: rgb(0, 191, 13);
+            border-color: rgb(0, 191, 13);
+            color: $defaultWhiteColor;
+        }
     }
 }
