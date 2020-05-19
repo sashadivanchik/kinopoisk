@@ -5,36 +5,39 @@ import * as Yup from 'yup';
 
 import './Registration.scss';
 
-// const validate = values => {
-//     const errors = {};
-//     if (!values.firstName) {
-//         errors.firstName = 'Заполните это поле';
-//     } else if (!/^[а-яА-ЯёЁa-zA-Z]+$/.test(values.firstName)) {
-//         errors.firstName = 'Некоректные символы';
-//     } else if (values.firstName.length > 15) {
-//         errors.firstName = 'Не более 15 символов';
-//     }
+const InputRegistration = ({ label, name, type, handleChange, handleBlur, value, values, errors, touched }) => {
+    return (
+        <div className='registration__input-wrapper'>
+            <label
+                    className='registration__label'
+                    htmlFor={name}
+                >
+                    {label}
+                </label>
+                <input
+                    className='registration__input'
+                    name={name}
+                    type={type}
+                    onChange={handleChange}
+                    onBlur={handleBlur}
+                    value={value}
+                />
+                <div className='registration__error'>{(values && errors || touched) ? errors: null}</div>
+        </div>
+    );
+};
 
-//     if (!values.lastName) {
-//         errors.lastName = 'Заполните это поле';
-//     } else if (!/^[а-яА-ЯёЁa-zA-Z]+$/.test(values.lastName)) {
-//         errors.lastName = 'Некоректные символы';
-//     } else if (values.lastName.length > 20) {
-//           errors.lastName = 'Не более 20 символов';
-//     }
-
-//     if (!values.email) {
-//         errors.email = 'Заполните это поле';
-//     } else if (!/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(values.email)) {
-//         errors.email = 'Неверный адрес почты';
-//     }
-
-//     if (!values.password) {
-//       errors.password = 'Заполните это поле';
-//     } 
-
-//     return errors;
-// };
+const ButtonSubmit = ({ title, valid, dirty }) => {
+    return (
+        <button
+            disabled={!(valid && dirty)}
+            className={`registration__submit-button ${valid && dirty ? 'registration__submit-button--active' : ''}`}
+            type='submit'
+        >
+            {title}
+        </button>
+    )
+}
 
 export const Registration = ({ setShow }) => {
 
@@ -46,30 +49,30 @@ export const Registration = ({ setShow }) => {
             password: ''
         },
         validationSchema: Yup.object({
-          firstName: Yup.string()
-              .matches(/^[а-яА-ЯёЁa-zA-Z]+$/, {message: 'Некоректные символы'})
-              .min(2, 'Не менее 2 символов')
-              .max(15, 'Не более 15 символов')
-              .required('Заполните это поле'),
-          lastName: Yup.string()
-              .matches(/^[а-яА-ЯёЁa-zA-Z]+$/, {message: 'Некоректные символы'})
-              .min(2, 'Не менее 2 символов')
-              .max(20, 'Не более 20 символов')
-              .required('Заполните это поле'),
-          email: Yup.string()
-              .email('Неверный адрес почты')
-              .required('Заполните это поле'),
-          password: Yup.string()
-            .min(6, 'Не менее 6 символов')
-            .max(20, 'Не более 20 символов')
-            .required('Заполните это поле')
-        }),
-        onSubmit: values => {
-            alert(
-                JSON.stringify(values, null, 2)
-            );
-            setShow(false);
-        }
+            firstName: Yup.string()
+                .matches(/^[а-яА-ЯёЁa-zA-Z]+$/, {message: 'Некоректные символы'})
+                .min(2, 'Не менее 2 символов')
+                .max(15, 'Не более 15 символов')
+                .required('Заполните это поле'),
+            lastName: Yup.string()
+                .matches(/^[а-яА-ЯёЁa-zA-Z]+$/, {message: 'Некоректные символы'})
+                .min(2, 'Не менее 2 символов')
+                .max(20, 'Не более 20 символов')
+                .required('Заполните это поле'),
+            email: Yup.string()
+                .email('Неверный формат почты')
+                .required('Заполните это поле'),
+            password: Yup.string()
+                .min(6, 'Не менее 6 символов')
+                .max(20, 'Не более 20 символов')
+                .required('Заполните это поле')
+            }),
+            onSubmit: values => {
+                alert(
+                    JSON.stringify(values, null, 2)
+                );
+                setShow(false);
+            }
     });
     return (
         <div className='registration'>
@@ -80,79 +83,55 @@ export const Registration = ({ setShow }) => {
                 className='registration__form'
                 onSubmit={formik.handleSubmit}
             >
-                <label
-                    className='registration__label'
-                    htmlFor='firstName'
-                >
-                    Имя
-                </label>
-                <input
-                    className='registration__input'
-                    id='firstName'
-                    name='firstName'
-                    type='text'
-                    onChange={formik.handleChange}
-                    onBlur={formik.handleBlur}
-                    value={
-                        formik.values.firstName
-                    }
+                <InputRegistration 
+                    label={'Имя'}
+                    name={'firstName'}
+                    type={'text'}
+                    handleChange={formik.handleChange}
+                    handleBlur={formik.handleBlur}
+                    value={formik.values.firstName}
+                    values={formik.values.firstName}
+                    errors={formik.errors.firstName}
+                    touched={formik.touched.firstName}
                 />
-                <div className='registration__error'>{(formik.touched.firstName && formik.errors.firstName) ? formik.errors.firstName : null}</div> 
-                <label
-                    className='registration__label'
-                    htmlFor='lastName'
-                >
-                    Фамилия
-                </label>
-                <input
-                    className='registration__input'
-                    id='lastName'
-                    name='lastName'
-                    type='text'
-                    onChange={formik.handleChange}
-                    onBlur={formik.handleBlur}
+                <InputRegistration 
+                    label={'Фамилия'}
+                    name={'lastName'}
+                    type={'text'}
+                    handleChange={formik.handleChange}
+                    handleBlur={formik.handleBlur}
                     value={formik.values.lastName}
+                    values={formik.values.lastName}
+                    errors={formik.errors.lastName}
+                    touched={formik.touched.lastName}
                 />
-                <div className='registration__error'>{(formik.touched.lastName && formik.errors.lastName) ? formik.errors.lastName : null}</div> 
-                <label
-                    className='registration__label'
-                    htmlFor='email'
-                >
-                    Email
-                </label>
-                <input
-                    className='registration__input'
-                    id='email'
-                    name='email'
-                    type='email'
-                    onChange={formik.handleChange}
-                    onBlur={formik.handleBlur}
+                <InputRegistration 
+                    label={'Email'}
+                    name={'email'}
+                    type={'email'}
+                    handleChange={formik.handleChange}
+                    handleBlur={formik.handleBlur}
                     value={formik.values.email}
+                    values={formik.values.email}
+                    errors={formik.errors.email}
+                    touched={formik.touched.email}
                 />
-                <div className='registration__error'>{(formik.touched.email && formik.errors.email) ? formik.errors.email : null}</div>
-                <label
-                    className='registration__label'
-                    htmlFor='password'
-                >
-                    Пароль
-                </label>
-                <input
-                    className='registration__input'
-                    id='password'
-                    name='password'
-                    type='password'
-                    onChange={formik.handleChange}
-                    onBlur={formik.handleBlur}
+                <InputRegistration 
+                    label={'Пароль'}
+                    name={'password'}
+                    type={'password'}
+                    handleChange={formik.handleChange}
+                    handleBlur={formik.handleBlur}
                     value={formik.values.password}
+                    values={formik.values.password}
+                    errors={formik.errors.password}
+                    touched={formik.touched.password}
                 />
-                <div className='registration__error'>{(formik.touched.password && formik.errors.password) ? formik.errors.password : null}</div> 
-                <button
-                    disabled={!(formik.isValid && formik.dirty)}
-                    className={`registration__submit-button ${formik.isValid && formik.dirty ? 'registration__submit-button--active' : ''}`}
-                    type='submit'
-                >
-                    Зарегистрироваться
-                </button>
+                <ButtonSubmit
+                    title={'Зарегистрироваться'}
+                    valid={formik.isValid}
+                    dirty={formik.dirty}
+                />
             </form>
         </div>
     );
@@ -160,5 +139,5 @@ export const Registration = ({ setShow }) => {
 
 
 Registration.propTypes = {
-  setShow: PropTypes.func
+    setShow: PropTypes.func
 }
