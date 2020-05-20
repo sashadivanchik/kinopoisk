@@ -4,6 +4,7 @@ import { useFormik } from 'formik';
 import * as Yup from 'yup';
 
 import './Registration.scss';
+import { fetchPost } from '../../API/fetchPost';
 
 const InputRegistration = ({ label, name, type, handleChange, handleBlur, value, values, errors, touched }) => {
     return (
@@ -22,7 +23,7 @@ const InputRegistration = ({ label, name, type, handleChange, handleBlur, value,
                     onBlur={handleBlur}
                     value={value}
                 />
-                <div className='registration__error'>{(values && errors || touched) ? errors: null}</div>
+                <div className='registration__error'>{((values && errors) || touched) ? errors: null}</div>
         </div>
     );
 };
@@ -36,8 +37,8 @@ const ButtonSubmit = ({ title, valid, dirty }) => {
         >
             {title}
         </button>
-    )
-}
+    );
+};
 
 export const Registration = ({ setShow }) => {
 
@@ -68,9 +69,7 @@ export const Registration = ({ setShow }) => {
                 .required('Заполните это поле')
             }),
             onSubmit: values => {
-                alert(
-                    JSON.stringify(values, null, 2)
-                );
+                fetchPost(values);
                 setShow(false);
             }
     });
@@ -139,5 +138,23 @@ export const Registration = ({ setShow }) => {
 
 
 Registration.propTypes = {
-    setShow: PropTypes.func
+    setShow: PropTypes.func.isRequired,
+}
+
+ButtonSubmit.propTypes = {
+    title: PropTypes.string.isRequired,
+    valid: PropTypes.bool.isRequired,
+    dirty: PropTypes.bool.isRequired,
+}
+
+InputRegistration.propTypes = {
+    label: PropTypes.string.isRequired,
+    name: PropTypes.string.isRequired,
+    type: PropTypes.string.isRequired,
+    handleChange: PropTypes.func.isRequired,
+    handleBlur: PropTypes.func.isRequired,
+    value: PropTypes.string.isRequired,
+    values: PropTypes.bool.isRequired,
+    errors: PropTypes.bool.isRequired,
+    touched: PropTypes.bool.isRequired,
 }

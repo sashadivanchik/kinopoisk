@@ -45,6 +45,7 @@
     }
 
     &__submit-button {
+        display: block;
         cursor: pointer;
         font-size: 10px;
         text-transform: uppercase;
@@ -56,11 +57,10 @@
         border-radius: 2px;
         text-align: center;
         padding: 9px 13px 8px;
-        display: inline-block;
         border: 1px solid $defaultBlackColor;
         outline: none;
         position: relative;
-        font-family: "Ubuntu", Arial, Helvetica, sans-serif;
+        font-family: $primaryFont;
         letter-spacing: 0.4px;
         width: auto;
         vertical-align: middle;
