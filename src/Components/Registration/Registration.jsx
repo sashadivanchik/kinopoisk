@@ -4,7 +4,6 @@ import { useFormik } from 'formik';
 import * as Yup from 'yup';
 
 import './Registration.scss';
-import { fetchPost } from '../../API/fetchPost';
 
 const InputRegistration = ({ label, name, type, handleChange, handleBlur, value, values, errors, touched }) => {
     return (
@@ -69,7 +68,7 @@ export const Registration = ({ setShow }) => {
                 .required('Заполните это поле')
             }),
             onSubmit: values => {
-                fetchPost(values);
+                alert(JSON.stringify(values, null, 2))
                 setShow(false);
             }
     });
