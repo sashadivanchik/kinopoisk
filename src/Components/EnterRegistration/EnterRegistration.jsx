@@ -1,9 +1,11 @@
 import React, { useState } from 'react';
-import RegistrationModal from '../../Modals/RegistrationModal';
-import { Registration } from '../Registration/Registration';
+// import RegistrationModal from '../../modals/RegistrationModal';
+// import { Registration } from '../Registration/Registration';
 
-import '../../Modals/RegistrationModal/RegistrationModal.scss';
+import '../../modals/RegistrationModal/RegistrationModal.scss';
 import './EnterRegistration.scss';
+import RegistrationModal from '../../modals/RegistrationModal/RegistrationModal';
+import { Registration } from '../Registration/Registration';
 
 export const EnterRegistration = () => {
 
@@ -19,9 +21,9 @@ export const EnterRegistration = () => {
       </button>
       { 
         show && (
-        <RegistrationModal setShow={ setShow }>
-          <Registration setShow={ setShow } />
-        </RegistrationModal>
+          <RegistrationModal setShow={ setShow }>
+              <Registration setShow={ setShow } />
+          </RegistrationModal>
         )
       }
     </div>
