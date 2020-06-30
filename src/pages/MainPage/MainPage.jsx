@@ -46,10 +46,9 @@ const MainPage = () => {
     return (
         <div className='main-page'>
             <h1 className='main-page__title'>
-                Скоро в кинотеатрах
+                Главная
             </h1>
             <div className='main-page__container'>
-                Скоро в кинотеатрах
             </div>
         </div>
     );
