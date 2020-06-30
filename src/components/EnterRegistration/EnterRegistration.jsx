@@ -1,4 +1,4 @@
-import React, { useState } from '../../pages/MainPage/node_modules/react';
+import React, { useState } from 'react';
 // import RegistrationModal from '../../modals/RegistrationModal';
 // import { Registration } from '../Registration/Registration';
 
