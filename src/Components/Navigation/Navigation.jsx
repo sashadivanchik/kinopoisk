@@ -1,4 +1,4 @@
-import React from 'react';
+import React from '../../pages/MainPage/node_modules/react';
 import { NavLink } from 'react-router-dom';
 import {
     PAGE_MAIN,

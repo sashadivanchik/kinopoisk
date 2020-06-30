@@ -1,4 +1,4 @@
-import React from 'react';
+import React from '../../pages/MainPage/node_modules/react';
 import { Switch, Route } from 'react-router-dom';
 
 import './App.scss';

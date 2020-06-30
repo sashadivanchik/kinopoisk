@@ -1,4 +1,4 @@
-import React from 'react';
+import React from '../../pages/MainPage/node_modules/react';
 
 import './Header.scss';
 import { Navigation } from '../Navigation/Navigation';
