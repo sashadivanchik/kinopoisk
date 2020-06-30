@@ -1,46 +1,58 @@
-import React from 'react';
-
+import React, { useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import './MainPage.scss';
+import { fetchPrewievPopular, fetchPrewievExpected } from '../../store/actions/actions';
+import { PreviewWidget } from '../../components/PreviewWidget/PreviewWidget';
+import { Error } from '../../components/Errors/Erorr'
+
 const MainPage = () => {
+    const dispatch = useDispatch();
+    const movies = useSelector((state) => ({
+        popular: state.prewievMovies.popular,
+        expected: state.prewievMovies.expected,
+        viewed: state.viewedMovies.viewed
+    }))
+    
+    useEffect(() => {
+        dispatch(fetchPrewievPopular())
+        dispatch(fetchPrewievExpected())
+    }, [dispatch])
 
-    // const renderPopularWidget = () => {
-    //     const { popular } = this.props
-    //     if (popular.length) {
-    //         return (
-    //             <PreviewWidget 
-    //                 title='Популярное'
-    //                 movies={popular} 
-    //             />
-    //         );
-    //     }
-    //     return null;
-    // };
+    const renderPopularWidget = () => {
+        if (movies.popular.length) {
+            return (
+                <PreviewWidget
+                    title='Популярное'
+                    movies={movies.popular} 
+                />
+            );
+        }
+        return <Error text='Массив фильмов пуст' />;
+    };
 
-    // const renderUpcomingWidget = () => {
-    //     const { upcoming } = this.props
-    //     if (upcoming.length) {
-    //         return (
-    //             <PreviewWidget 
-    //                 title='Скоро в кинотеартах' 
-    //                 movies={upcoming} 
-    //             />
-    //         );
-    //     }
-    //     return null;
-    // };
+    const renderUpcomingWidget = () => {
+        if (movies.expected.length) {
+            return (
+                <PreviewWidget 
+                    title='Скоро в кинотеартах' 
+                    movies={movies.expected} 
+                />
+            );
+        }
+        return <Error text='Массив фильмов пуст' />;
+    };
 
-    // const renderViewedWidget = () => { 
-    //     const { viewed } = this.props;    
-    //     if (viewed.length) {
-    //         return (
-    //             <PreviewWidget 
-    //                 title='Просмотренные' 
-    //                 movies={viewed} 
-    //             />
-    //         );
-    //     }
-    //     return null;
-    // };
+    const renderViewedWidget = () => { 
+        if (movies.viewed.length) {
+            return (
+                <PreviewWidget 
+                    title='Просмотренные' 
+                    movies={movies.viewed} 
+                />
+            );
+        }
+        return <Error text='Просмотренных фильмов пок нет' />;
+    };
 
     
     return (
@@ -49,6 +61,9 @@ const MainPage = () => {
                 Главная
             </h1>
             <div className='main-page__container'>
+                {renderPopularWidget()}
+                {renderUpcomingWidget()}
+                {renderViewedWidget()}
             </div>
         </div>
     );

@@ -1,21 +1,27 @@
-import React from '../../pages/MainPage/node_modules/react';
+import React from 'react';
+import { useDispatch } from 'react-redux';
 import PropTypes from 'prop-types';
 import './MoviesList.scss';
+import { addInViewed } from '../../store/actions/actions';
 
 export const MoviesList = ({movies}) => {
+    const dispatch = useDispatch();
+    const addViewed = (id) => {
+        const viewedMovie = movies.find(item => item.id === id)
+        dispatch(addInViewed(viewedMovie))
+    }
     const renderList = () => {
-        const path =
-            'https://image.tmdb.org/t/p/w500';
         return movies.map(item => (
             <li
                 className={'movies-list__item'}
                 key={item.id}
+                onClick={() => addViewed(item.id)}
             >
                 <img
                     className={'movies-list__image'}
                     src={
                         item.src ||
-                        `${path}${item.poster_path}`
+                        item.posterPath
                     }
                     alt='баннер'
                 />

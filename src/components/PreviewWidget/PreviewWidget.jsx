@@ -1,8 +1,7 @@
-import React from '../../pages/MainPage/node_modules/react';
+import React from 'react';
 import PropTypes from 'prop-types';
 
 import { MoviesList } from '../MoviesList/MoviesList';
-import { Error } from '../Errors/Erorr';
 
 import './PreviewWidget.scss';
 
@@ -14,13 +13,11 @@ export const PreviewWidget = props => {
 
     const renderList = () => {
         const movies = sliceArray(0, 6);
-            if (movies.length) {
-                return (
-                    <MoviesList movies={movies} />
-                )
-            }
-        return <Error text='Массив фильмов пуст' />;
+        return (
+            <MoviesList movies={movies} />
+        )
     };
+
     return (
         <div className='preview-widget'>
             <h1 className='preview-widget__title'>
