@@ -1,18 +1,33 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
+import {useDispatch, useSelector} from 'react-redux';
 
 import './PopularPage.scss';
+import { MoviesList } from '../../components/MoviesList/MoviesList';
+import { Error } from '../../components/Errors/Erorr';
+import { fetchMovies } from '../../store/actions/actions';
+import { POPULAR_MOVIES_URL } from '../../api/constants';
+import { FETCH_POPULAR_MOVIES } from '../../store/types/constants';
 
 const PopularPage = () => {
+    const dispatch = useDispatch();
+    const movies = useSelector((state) => ({
+        popular: state.popularMovies.popularList,
+    }))
 
-    // const renderPopularList = () => {
-    //     const { movies } = this.props;
-    //     if (movies.length) {
-    //         return (
-    //             <MoviesList movies={movies} />
-    //         );
-    //     }
-    //     return <Error text='Массив фильмов пуст' />;
-    // };
+    const [page, setPage] = useState(1);
+
+    useEffect(() => {
+        dispatch(fetchMovies(POPULAR_MOVIES_URL, FETCH_POPULAR_MOVIES, page))
+    }, [dispatch])
+
+    const renderPopularList = () => {
+        if (movies.popular.length) {
+            return (
+                <MoviesList movies={movies.popular} />
+            );
+        }
+        return <Error text='Массив фильмов пуст' />;
+    };
 
     return (
         <div className='popular-page'>
@@ -20,7 +35,7 @@ const PopularPage = () => {
                 Популярное
             </h1>
             <div className='popular-page__container'>
-                Популярное
+                {renderPopularList()}
             </div>
         </div>
     );

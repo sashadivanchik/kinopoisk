@@ -1,21 +1,21 @@
-import { FETCH_PREWIEV_POPULAR, FETCH_PREWIEV_EXPECTED } from '../types/constants';
+import { FETCH_POPULAR_PREVIEW, FETCH_UPCOMING_PREVIEW } from '../types/constants';
 
 const initialState = {
   popular: [],
-  expected: []
+  upcoming: []
 };
 
 export const prewievMovies = (state = initialState, action) => {
   switch (action.type) {
-    case FETCH_PREWIEV_POPULAR: 
+    case FETCH_POPULAR_PREVIEW: 
       return {
         ...state,
         popular: action.payload
       }
-    case FETCH_PREWIEV_EXPECTED:
+    case FETCH_UPCOMING_PREVIEW:
       return {
         ...state,
-        expected: action.payload
+        upcoming: action.payload
       }
     default: return state;
   }

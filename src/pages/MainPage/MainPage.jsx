@@ -1,21 +1,28 @@
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import './MainPage.scss';
-import { fetchPrewievPopular, fetchPrewievExpected } from '../../store/actions/actions';
+import { fetchPrewiev } from '../../store/actions/actions';
 import { PreviewWidget } from '../../components/PreviewWidget/PreviewWidget';
 import { Error } from '../../components/Errors/Erorr'
+import { POPULAR_MOVIES_URL, UPCOMING_MOVIES_URL } from '../../api/constants';
+import { FETCH_POPULAR_PREVIEW, FETCH_UPCOMING_PREVIEW } from '../../store/types/constants';
+import Loader from '../../components/Loader/Loader';
 
 const MainPage = () => {
     const dispatch = useDispatch();
     const movies = useSelector((state) => ({
         popular: state.prewievMovies.popular,
-        expected: state.prewievMovies.expected,
+        upcoming: state.prewievMovies.upcoming,
         viewed: state.viewedMovies.viewed
+    }))
+
+    const app = useSelector((state) => ({
+        loading: state.appReducer.loading
     }))
     
     useEffect(() => {
-        dispatch(fetchPrewievPopular())
-        dispatch(fetchPrewievExpected())
+        dispatch(fetchPrewiev(POPULAR_MOVIES_URL, FETCH_POPULAR_PREVIEW))
+        dispatch(fetchPrewiev(UPCOMING_MOVIES_URL, FETCH_UPCOMING_PREVIEW))
     }, [dispatch])
 
     const renderPopularWidget = () => {
@@ -31,18 +38,18 @@ const MainPage = () => {
     };
 
     const renderUpcomingWidget = () => {
-        if (movies.expected.length) {
+        if (movies.upcoming.length) {
             return (
                 <PreviewWidget 
                     title='Скоро в кинотеартах' 
-                    movies={movies.expected} 
+                    movies={movies.upcoming} 
                 />
             );
         }
         return <Error text='Массив фильмов пуст' />;
     };
 
-    const renderViewedWidget = () => { 
+    const renderViewedWidget = () => {
         if (movies.viewed.length) {
             return (
                 <PreviewWidget 
@@ -51,10 +58,13 @@ const MainPage = () => {
                 />
             );
         }
-        return <Error text='Просмотренных фильмов пок нет' />;
+        return <Error text='Просмотренных фильмов пока нет' />;
     };
 
-    
+    if (app.loading) {
+        return <Loader />
+    }
+
     return (
         <div className='main-page'>
             <h1 className='main-page__title'>

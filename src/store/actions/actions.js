@@ -1,5 +1,6 @@
-import { FETCH_PREWIEV_POPULAR, FETCH_PREWIEV_EXPECTED, ADD_VIEWED_MOVIES } from '../types/constants';
-import { POPULAR_MOVIES_URL, UPCOMING_MOVIES_URL } from '../../api/constants';
+import {  
+  ADD_VIEWED_MOVIES, SHOW_LOADER, HIDE_LOADER, 
+} from '../types/constants';
 
 export const IMAGE_PATH = `https://image.tmdb.org/t/p/w500`;
 
@@ -7,34 +8,24 @@ const getImageURL = path => {
   return `${IMAGE_PATH}${path}`;
 };
 
-export const fetchPrewievPopular = () => {
-  return async (dispatch) => {
-    try {
-      console.log('старт прелоадера если есть')
-      const responce = await fetch(POPULAR_MOVIES_URL);
-      const json = await responce.json();
-      const transformData = json.results.map(item => {
-        return {
-          id: item.id,
-          title: item.title,
-          posterPath: getImageURL(item.poster_path)
-        }
-      });
-      dispatch({ type: FETCH_PREWIEV_POPULAR, payload: transformData})
-    } catch (e) {
-      console.log(e)
-      console.log('ошибка')
-    } finally {
-      console.log('если есть прелоадер то выключит')
-    }   
-  } 
-}
+export const showLoader = () => {
+  return {
+    type: SHOW_LOADER
+  }
+};
 
-export const fetchPrewievExpected = () => {
+export const hideLoader = () => {
+  return {
+    type: HIDE_LOADER
+  }
+};
+
+export const fetchPrewiev = (url, actionType) => {
   return async (dispatch) => {
     try {
-      console.log('старт прелоадера если есть')
-      const responce = await fetch(UPCOMING_MOVIES_URL);
+      console.log('старт прелоадера если есть');
+      dispatch(showLoader());
+      const responce = await fetch(url);
       const json = await responce.json();
       const transformData = json.results.map(item => {
         return {
@@ -43,15 +34,43 @@ export const fetchPrewievExpected = () => {
           posterPath: getImageURL(item.poster_path)
         }
       });
-      dispatch({ type: FETCH_PREWIEV_EXPECTED, payload: transformData})
+      setTimeout(() => {
+        dispatch({ type: actionType, payload: transformData})  
+        dispatch(hideLoader()); 
+      }, 5000)
     } catch (e) {
-      console.log(e)
-      console.log('ошибка')
+      console.log(e);
+      console.log('ошибка');
     } finally {
-      console.log('если есть прелоадер то выключит')
+      console.log('если есть прелоадер то выключит');  
     }   
   } 
-}
+};
+
+export const fetchMovies = (url, actionType, page) => {
+  return async (dispatch) => {
+    try {
+      console.log('старт прелоадера если есть')
+      dispatch(showLoader())
+      const responce = await fetch(`${url}&page=${page}`);
+      const json = await responce.json();
+      const transformData = json.results.map(item => {
+        return {
+          id: item.id,
+          title: item.title,
+          posterPath: getImageURL(item.poster_path)
+        }
+      });
+      dispatch({ type: actionType, payload: transformData})
+    } catch (e) {
+      console.log(e);
+      console.log('ошибка');
+    } finally {
+      console.log('если есть прелоадер то выключит');
+      dispatch(hideLoader());   
+    }   
+  } 
+};
 
 export const addInViewed = (movie) => {
   return {
@@ -60,4 +79,4 @@ export const addInViewed = (movie) => {
       movie
     }
   }
-}
+};

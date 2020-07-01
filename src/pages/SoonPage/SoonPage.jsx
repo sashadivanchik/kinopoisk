@@ -1,17 +1,34 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
+import {useDispatch, useSelector} from 'react-redux';
 
 import './SoonPage.scss';
+import { MoviesList } from '../../components/MoviesList/MoviesList';
+import { Error } from '../../components/Errors/Erorr';
+import {fetchMovies} from '../../store/actions/actions';
+import { UPCOMING_MOVIES_URL } from '../../api/constants';
+import { FETCH_UPCOMING_MOVIES } from '../../store/types/constants';
 
 const SoonPage = () => {
-    // renderSoonList = () => {
-    //     const { movies } = this.props;
-    //     if (movies.length) {
-    //         return (
-    //             <MoviesList movies={movies} />
-    //         );
-    //     }
-    //     return <Error text='Массив фильмов пуст' />;
-    // };
+    const dispatch = useDispatch();
+    const movies = useSelector((state) => ({
+        upcoming: state.upcomingMovies.upcomingList,
+    }))
+
+    const [page, setPage] = useState(1);
+
+    useEffect(() => {
+        dispatch(fetchMovies(UPCOMING_MOVIES_URL, FETCH_UPCOMING_MOVIES, page))
+    }, [dispatch])
+
+    const renderSoonList = () => {
+
+        if (movies.upcoming.length) {
+            return (
+                <MoviesList movies={movies.upcoming} />
+            );
+        }
+        return <Error text='Массив фильмов пуст' />;
+    };
 
     return (
         <div className='soon-page'>
@@ -19,7 +36,7 @@ const SoonPage = () => {
                 Скоро в кинотеатрах
             </h1>
             <div className='soon-page__container'>
-                Скоро в кинотеатрах
+                {renderSoonList()}
             </div>
         </div>
     );
