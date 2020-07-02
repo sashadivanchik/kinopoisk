@@ -8,22 +8,28 @@ import {fetchMovies} from '../../store/actions/actions';
 import { UPCOMING_MOVIES_URL } from '../../api/constants';
 import { FETCH_UPCOMING_MOVIES } from '../../store/types/constants';
 import Loader from '../../components/Loader/Loader';
+import ReactPagination from '../../components/Pagination/Pagination';
 
 const SoonPage = () => {
     const dispatch = useDispatch();
     const movies = useSelector((state) => ({
         upcoming: state.upcomingMovies.upcomingList,
+        total: state.upcomingMovies.totalResults
     }));
 
     const app = useSelector((state) => ({
         loading: state.appReducer.loading
     }));
 
-    const [page, setPage] = useState(1);
+    const [activePage, setPage] = useState(1);
 
     useEffect(() => {
-        dispatch(fetchMovies(UPCOMING_MOVIES_URL, FETCH_UPCOMING_MOVIES, page))
-    }, [dispatch])
+        dispatch(fetchMovies(UPCOMING_MOVIES_URL, FETCH_UPCOMING_MOVIES, activePage))
+    }, [dispatch, activePage])
+
+    const changePage = (activePage) => {
+        setPage(activePage)
+    };
 
     const renderSoonList = () => {
         if (movies.upcoming.length) {
@@ -46,6 +52,11 @@ const SoonPage = () => {
             <div className='soon-page__container'>
                 {renderSoonList()}
             </div>
+            <ReactPagination 
+                page={activePage}
+                func={changePage}
+                total={movies.total}
+            />
         </div>
     );
 }

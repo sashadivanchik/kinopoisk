@@ -1,18 +1,31 @@
-import React from 'react';
+import React, {useState} from 'react';
 import {useSelector} from 'react-redux';
 
 import './ViewedPage.scss';
 import { MoviesList } from '../../components/MoviesList/MoviesList';
+import ReactPagination from '../../components/Pagination/Pagination';
 
 const ViewedPage = () => {
     const movies = useSelector((state) => ({
         viewed: state.viewedMovies.viewed
     }))
 
+    const [activePage, setPage] = useState(1);
+    const [startIndex, setIndex] = useState(0);
+
+    const changePage = (activePage) => {
+        setPage(activePage)
+        setIndex((activePage - 1) * 20)
+    };
+
+    const getViewed = () => {       
+        return movies.viewed.slice(startIndex, startIndex + 20);
+    };
+
     const renderViewedList = () => {
-        if (movies.viewed.length) {
+        if (getViewed().length) {
             return (
-                <MoviesList movies={movies.viewed} />
+                <MoviesList movies={getViewed()} />
             );
         }
     };
@@ -33,6 +46,13 @@ const ViewedPage = () => {
             <div className='viewed-page__container'>
                 {renderViewedList()}
             </div>
+            {movies.viewed.length >= 20 && (
+                    <ReactPagination 
+                        page={activePage}
+                        func={changePage}
+                        total={movies.viewed.length}
+                    />
+            )}
         </div>
     );
 }
