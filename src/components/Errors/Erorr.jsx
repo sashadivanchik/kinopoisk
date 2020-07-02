@@ -1,4 +1,4 @@
-import React from '../../pages/MainPage/node_modules/react';
+import React from 'react';
 import PropTypes from 'prop-types';
 
 import './Error.scss';

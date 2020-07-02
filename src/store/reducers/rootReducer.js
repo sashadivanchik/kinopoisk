@@ -1,8 +1,16 @@
 import { combineReducers } from 'redux';
-import movies from './movies';
+import {prewievMovies} from './prewievMovies';
+import {viewedMovies} from './viewedMovies';
+import {popularMovies} from './popularMovies'
+import {upcomingMovies} from './upcomingMovies';
+import {appReducer} from './appReducer';
 
 const reducers = {
-  movies
+  prewievMovies,
+  viewedMovies,
+  popularMovies,
+  upcomingMovies,
+  appReducer
 };
 
 const rootReducer = combineReducers(reducers);

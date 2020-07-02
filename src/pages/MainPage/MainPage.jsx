@@ -1,54 +1,78 @@
-import React from 'react';
-
+import React, { useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import './MainPage.scss';
+import { fetchPrewiev } from '../../store/actions/actions';
+import { PreviewWidget } from '../../components/PreviewWidget/PreviewWidget';
+import { POPULAR_MOVIES_URL, UPCOMING_MOVIES_URL } from '../../api/constants';
+import { FETCH_POPULAR_PREVIEW, FETCH_UPCOMING_PREVIEW } from '../../store/types/constants';
+import Loader from '../../components/Loader/Loader';
+
 const MainPage = () => {
+    const dispatch = useDispatch();
+    const movies = useSelector((state) => ({
+        popular: state.prewievMovies.popular,
+        upcoming: state.prewievMovies.upcoming,
+        viewed: state.viewedMovies.viewed
+    }))
 
-    // const renderPopularWidget = () => {
-    //     const { popular } = this.props
-    //     if (popular.length) {
-    //         return (
-    //             <PreviewWidget 
-    //                 title='Популярное'
-    //                 movies={popular} 
-    //             />
-    //         );
-    //     }
-    //     return null;
-    // };
-
-    // const renderUpcomingWidget = () => {
-    //     const { upcoming } = this.props
-    //     if (upcoming.length) {
-    //         return (
-    //             <PreviewWidget 
-    //                 title='Скоро в кинотеартах' 
-    //                 movies={upcoming} 
-    //             />
-    //         );
-    //     }
-    //     return null;
-    // };
-
-    // const renderViewedWidget = () => { 
-    //     const { viewed } = this.props;    
-    //     if (viewed.length) {
-    //         return (
-    //             <PreviewWidget 
-    //                 title='Просмотренные' 
-    //                 movies={viewed} 
-    //             />
-    //         );
-    //     }
-    //     return null;
-    // };
-
+    const app = useSelector((state) => ({
+        loading: state.appReducer.loading
+    }))
     
+    useEffect(() => {
+        dispatch(fetchPrewiev(POPULAR_MOVIES_URL, FETCH_POPULAR_PREVIEW))
+        dispatch(fetchPrewiev(UPCOMING_MOVIES_URL, FETCH_UPCOMING_PREVIEW))
+    }, [dispatch])
+
+    const renderPopularWidget = () => {
+        if (movies.popular.length) {
+            return (
+                <PreviewWidget
+                    title='Популярное'
+                    movies={movies.popular} 
+                />
+            );
+        }
+        return null;
+    };
+
+    const renderUpcomingWidget = () => {
+        if (movies.upcoming.length) {
+            return (
+                <PreviewWidget 
+                    title='Скоро в кинотеартах' 
+                    movies={movies.upcoming} 
+                />
+            );
+        }
+        return null;
+    };
+
+    const renderViewedWidget = () => {
+        if (movies.viewed.length) {
+            return (
+                <PreviewWidget 
+                    title='Просмотренные' 
+                    movies={movies.viewed} 
+                />
+            );
+        }
+        return null;
+    };
+
+    if (app.loading) {
+        return <Loader />
+    }
+
     return (
         <div className='main-page'>
             <h1 className='main-page__title'>
                 Главная
             </h1>
             <div className='main-page__container'>
+                {renderPopularWidget()}
+                {renderUpcomingWidget()}
+                {renderViewedWidget()}
             </div>
         </div>
     );
