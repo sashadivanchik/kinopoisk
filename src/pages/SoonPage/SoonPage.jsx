@@ -7,12 +7,17 @@ import { Error } from '../../components/Errors/Erorr';
 import {fetchMovies} from '../../store/actions/actions';
 import { UPCOMING_MOVIES_URL } from '../../api/constants';
 import { FETCH_UPCOMING_MOVIES } from '../../store/types/constants';
+import Loader from '../../components/Loader/Loader';
 
 const SoonPage = () => {
     const dispatch = useDispatch();
     const movies = useSelector((state) => ({
         upcoming: state.upcomingMovies.upcomingList,
-    }))
+    }));
+
+    const app = useSelector((state) => ({
+        loading: state.appReducer.loading
+    }));
 
     const [page, setPage] = useState(1);
 
@@ -21,7 +26,6 @@ const SoonPage = () => {
     }, [dispatch])
 
     const renderSoonList = () => {
-
         if (movies.upcoming.length) {
             return (
                 <MoviesList movies={movies.upcoming} />
@@ -29,6 +33,10 @@ const SoonPage = () => {
         }
         return <Error text='Массив фильмов пуст' />;
     };
+
+    if(app.loading) {
+        return <Loader />
+    }
 
     return (
         <div className='soon-page'>

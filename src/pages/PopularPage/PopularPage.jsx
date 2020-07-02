@@ -7,11 +7,16 @@ import { Error } from '../../components/Errors/Erorr';
 import { fetchMovies } from '../../store/actions/actions';
 import { POPULAR_MOVIES_URL } from '../../api/constants';
 import { FETCH_POPULAR_MOVIES } from '../../store/types/constants';
+import Loader from '../../components/Loader/Loader';
 
 const PopularPage = () => {
     const dispatch = useDispatch();
     const movies = useSelector((state) => ({
         popular: state.popularMovies.popularList,
+    }))
+
+    const app = useSelector((state) => ({
+        loading: state.appReducer.loading
     }))
 
     const [page, setPage] = useState(1);
@@ -28,6 +33,10 @@ const PopularPage = () => {
         }
         return <Error text='Массив фильмов пуст' />;
     };
+
+    if (app.loading) {
+        return <Loader />
+    }
 
     return (
         <div className='popular-page'>

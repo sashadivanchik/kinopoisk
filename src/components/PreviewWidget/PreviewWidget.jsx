@@ -4,6 +4,7 @@ import PropTypes from 'prop-types';
 import { MoviesList } from '../MoviesList/MoviesList';
 
 import './PreviewWidget.scss';
+import { Error } from '../Errors/Erorr';
 
 export const PreviewWidget = props => {   
     const sliceArray = (start, end) => {
@@ -13,9 +14,13 @@ export const PreviewWidget = props => {
 
     const renderList = () => {
         const movies = sliceArray(0, 6);
-        return (
-            <MoviesList movies={movies} />
-        )
+        if (movies.length) {
+            return (
+                <MoviesList movies={movies} />
+            );
+        }
+
+        return <Error text='Массив фильмов пуст' />
     };
 
     return (

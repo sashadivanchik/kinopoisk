@@ -23,7 +23,6 @@ export const hideLoader = () => {
 export const fetchPrewiev = (url, actionType) => {
   return async (dispatch) => {
     try {
-      console.log('старт прелоадера если есть');
       dispatch(showLoader());
       const responce = await fetch(url);
       const json = await responce.json();
@@ -37,20 +36,16 @@ export const fetchPrewiev = (url, actionType) => {
       setTimeout(() => {
         dispatch({ type: actionType, payload: transformData})  
         dispatch(hideLoader()); 
-      }, 5000)
+      }, 2000)
     } catch (e) {
-      console.log(e);
-      console.log('ошибка');
-    } finally {
-      console.log('если есть прелоадер то выключит');  
-    }   
+      console.error(e)
+    } 
   } 
 };
 
 export const fetchMovies = (url, actionType, page) => {
   return async (dispatch) => {
     try {
-      console.log('старт прелоадера если есть')
       dispatch(showLoader())
       const responce = await fetch(`${url}&page=${page}`);
       const json = await responce.json();
@@ -61,14 +56,13 @@ export const fetchMovies = (url, actionType, page) => {
           posterPath: getImageURL(item.poster_path)
         }
       });
-      dispatch({ type: actionType, payload: transformData})
+      setTimeout(() => {
+        dispatch({ type: actionType, payload: transformData})  
+        dispatch(hideLoader()); 
+      }, 2000)
     } catch (e) {
-      console.log(e);
-      console.log('ошибка');
-    } finally {
-      console.log('если есть прелоадер то выключит');
-      dispatch(hideLoader());   
-    }   
+      console.error(e);
+    } 
   } 
 };
 

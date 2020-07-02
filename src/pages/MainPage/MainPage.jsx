@@ -3,7 +3,6 @@ import { useDispatch, useSelector } from 'react-redux';
 import './MainPage.scss';
 import { fetchPrewiev } from '../../store/actions/actions';
 import { PreviewWidget } from '../../components/PreviewWidget/PreviewWidget';
-import { Error } from '../../components/Errors/Erorr'
 import { POPULAR_MOVIES_URL, UPCOMING_MOVIES_URL } from '../../api/constants';
 import { FETCH_POPULAR_PREVIEW, FETCH_UPCOMING_PREVIEW } from '../../store/types/constants';
 import Loader from '../../components/Loader/Loader';
@@ -34,7 +33,7 @@ const MainPage = () => {
                 />
             );
         }
-        return <Error text='Массив фильмов пуст' />;
+        return null;
     };
 
     const renderUpcomingWidget = () => {
@@ -46,7 +45,7 @@ const MainPage = () => {
                 />
             );
         }
-        return <Error text='Массив фильмов пуст' />;
+        return null;
     };
 
     const renderViewedWidget = () => {
@@ -58,7 +57,7 @@ const MainPage = () => {
                 />
             );
         }
-        return <Error text='Просмотренных фильмов пока нет' />;
+        return null;
     };
 
     if (app.loading) {
