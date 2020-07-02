@@ -36,7 +36,7 @@ export const fetchPrewiev = (url, actionType) => {
       setTimeout(() => {
         dispatch({ type: actionType, payload: transformData})  
         dispatch(hideLoader()); 
-      }, 3000)
+      }, 2000)
     } catch (e) {
       console.error(e)
     } 
