@@ -36,7 +36,7 @@ export const fetchPrewiev = (url, actionType) => {
       setTimeout(() => {
         dispatch({ type: actionType, payload: transformData})  
         dispatch(hideLoader()); 
-      }, 2000)
+      }, 3000)
     } catch (e) {
       console.error(e)
     } 
@@ -57,7 +57,7 @@ export const fetchMovies = (url, actionType, page) => {
         }
       });
       setTimeout(() => {
-        dispatch({ type: actionType, payload: transformData})  
+        dispatch({ type: actionType, payload: {movies: transformData, total: json.total_results}})  
         dispatch(hideLoader()); 
       }, 2000)
     } catch (e) {

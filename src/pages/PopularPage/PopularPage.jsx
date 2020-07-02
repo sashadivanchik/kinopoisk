@@ -8,22 +8,28 @@ import { fetchMovies } from '../../store/actions/actions';
 import { POPULAR_MOVIES_URL } from '../../api/constants';
 import { FETCH_POPULAR_MOVIES } from '../../store/types/constants';
 import Loader from '../../components/Loader/Loader';
+import ReactPagination from '../../components/Pagination/Pagination';
 
 const PopularPage = () => {
     const dispatch = useDispatch();
     const movies = useSelector((state) => ({
         popular: state.popularMovies.popularList,
+        total: state.popularMovies.totalResults
     }))
 
     const app = useSelector((state) => ({
         loading: state.appReducer.loading
     }))
 
-    const [page, setPage] = useState(1);
+    const [activePage, setPage] = useState(1);
 
     useEffect(() => {
-        dispatch(fetchMovies(POPULAR_MOVIES_URL, FETCH_POPULAR_MOVIES, page))
-    }, [dispatch])
+        dispatch(fetchMovies(POPULAR_MOVIES_URL, FETCH_POPULAR_MOVIES, activePage))
+    }, [dispatch, activePage])
+
+    const changePage = (activePage) => {
+        setPage(activePage)
+    };
 
     const renderPopularList = () => {
         if (movies.popular.length) {
@@ -46,6 +52,11 @@ const PopularPage = () => {
             <div className='popular-page__container'>
                 {renderPopularList()}
             </div>
+            <ReactPagination 
+                page={activePage}
+                func={changePage}
+                total={movies.total}
+            />
         </div>
     );
 }
