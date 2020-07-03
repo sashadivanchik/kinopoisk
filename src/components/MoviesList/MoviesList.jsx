@@ -1,8 +1,10 @@
 import React from 'react';
 import { useDispatch } from 'react-redux';
+import {NavLink} from 'react-router-dom';
 import PropTypes from 'prop-types';
 import './MoviesList.scss';
 import { addInViewed } from '../../store/actions/actions';
+import { PAGE_MOVIE } from '../../constants/routers/routers';
 
 export const MoviesList = ({movies}) => {
     const dispatch = useDispatch();
@@ -12,23 +14,28 @@ export const MoviesList = ({movies}) => {
     }
     const renderList = () => {
         return movies.map(item => (
-            <li
-                className={'movies-list__item'}
-                key={item.id}
-                onClick={() => addViewed(item.id)}
-            >
-                <img
-                    className={'movies-list__image'}
-                    src={
-                        item.src ||
-                        item.posterPath
-                    }
-                    alt='баннер'
-                />
-                <h1 className={'movies-list__title'}>
-                    {item.title}
-                </h1>
-            </li>
+            <NavLink
+                className={'movies-list__link'} 
+                to={`${PAGE_MOVIE}${item.id}`}
+                key={item.id}>
+                <li
+                    className={'movies-list__item'}
+                    key={item.id}
+                    onClick={() => addViewed(item.id)}
+                >
+                    <img
+                        className={'movies-list__image'}
+                        src={
+                            item.src ||
+                            item.posterPath
+                        }
+                        alt='баннер'
+                    />
+                    <h1 className={'movies-list__title'}>
+                        {item.title}
+                    </h1>
+                </li>
+            </NavLink>
         ))
     }
     return (

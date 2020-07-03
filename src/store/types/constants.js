@@ -8,3 +8,5 @@ export const ADD_VIEWED_MOVIES = 'ADD_VIEWED_MOVIES';
 
 export const SHOW_LOADER = 'SHOW_LOADER';
 export const HIDE_LOADER = 'HIDE_LOADER';
+
+export const FETCH_MOVIE_INFO = 'FETCH_MOVIE_INFO';
