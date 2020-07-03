@@ -17,12 +17,16 @@ const MainPage = () => {
 
     const app = useSelector((state) => ({
         loading: state.appReducer.loading
-    }))
+    }));
     
     useEffect(() => {
         dispatch(fetchPrewiev(POPULAR_MOVIES_URL, FETCH_POPULAR_PREVIEW))
         dispatch(fetchPrewiev(UPCOMING_MOVIES_URL, FETCH_UPCOMING_PREVIEW))
-    }, [dispatch])
+    }, [dispatch]);
+
+    const fromTheEnd = (array, value) => {
+        return array.slice(value)
+    };
 
     const renderPopularWidget = () => {
         if (movies.popular.length) {
@@ -49,11 +53,12 @@ const MainPage = () => {
     };
 
     const renderViewedWidget = () => {
+        const lastViewed = fromTheEnd(movies.viewed, -6);
         if (movies.viewed.length) {
             return (
                 <PreviewWidget 
                     title='Просмотренные' 
-                    movies={movies.viewed} 
+                    movies={lastViewed} 
                 />
             );
         }
