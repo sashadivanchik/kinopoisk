@@ -24,7 +24,7 @@ const ViewedPage = () => {
 
     const renderViewedList = () => {
         const viewed = getViewed();
-        if (getViewed().length) {
+        if (viewed.length) {
             return (
                 <MoviesList movies={viewed} />
             );
