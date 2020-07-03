@@ -8,7 +8,7 @@ import ReactPagination from '../../components/Pagination/Pagination';
 const ViewedPage = () => {
     const movies = useSelector((state) => ({
         viewed: state.viewedMovies.viewed
-    }))
+    }));
 
     const [activePage, setPage] = useState(1);
     const [startIndex, setIndex] = useState(0);
@@ -23,9 +23,10 @@ const ViewedPage = () => {
     };
 
     const renderViewedList = () => {
+        const viewed = getViewed();
         if (getViewed().length) {
             return (
-                <MoviesList movies={getViewed()} />
+                <MoviesList movies={viewed} />
             );
         }
     };
