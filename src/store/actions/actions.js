@@ -57,7 +57,33 @@ export const fetchMovies = (url, actionType, page) => {
         }
       });
       setTimeout(() => {
-        dispatch({ type: actionType, payload: {movies: transformData, total: json.total_results}})  
+        dispatch({ type: actionType,
+          payload: {
+            movies: transformData,
+            total: json.total_results
+          }})  
+        dispatch(hideLoader()); 
+      }, 2000)
+    } catch (e) {
+      console.error(e);
+    } 
+  } 
+};
+
+export const fetchMovie = (actionType, id) => {
+  return async (dispatch) => {
+    try {
+      dispatch(showLoader())
+      const responce = await fetch(`https://api.themoviedb.org/3/movie/${id}?api_key=84ecb8320b91dea5c8ff7bc8404b9b0c`);
+      const json = await responce.json();
+      setTimeout(() => {
+        dispatch({ type: actionType, payload: {
+          title: json.original_title,
+          overview: json.overview,
+          genres: json.genres,
+          release: json.release_date,
+          posterPath: getImageURL(json.poster_path)
+        }})  
         dispatch(hideLoader()); 
       }, 2000)
     } catch (e) {
