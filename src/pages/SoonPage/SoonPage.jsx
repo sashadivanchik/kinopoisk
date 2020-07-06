@@ -1,10 +1,10 @@
 import React, { useEffect, useState } from 'react';
-import {useDispatch, useSelector} from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 
 import './SoonPage.scss';
 import { MoviesList } from '../../components/MoviesList/MoviesList';
 import { Error } from '../../components/Errors/Erorr';
-import {fetchMovies} from '../../store/actions/actions';
+import { fetchMovies } from '../../store/actions/actions';
 import { UPCOMING_MOVIES_URL } from '../../api/constants';
 import { FETCH_UPCOMING_MOVIES } from '../../store/types/constants';
 import Loader from '../../components/Loader/Loader';
@@ -12,12 +12,10 @@ import ReactPagination from '../../components/Pagination/Pagination';
 
 const SoonPage = () => {
     const dispatch = useDispatch();
-    const movies = useSelector((state) => ({
-        upcoming: state.upcomingMovies.upcomingList,
-        total: state.upcomingMovies.totalResults
-    }));
 
-    const app = useSelector((state) => ({
+    const props = useSelector((state) => ({
+        upcoming: state.upcomingMovies.upcomingList,
+        total: state.upcomingMovies.totalResults,
         loading: state.appReducer.loading
     }));
 
@@ -32,15 +30,15 @@ const SoonPage = () => {
     };
 
     const renderSoonList = () => {
-        if (movies.upcoming.length) {
+        if (props.upcoming.length) {
             return (
-                <MoviesList movies={movies.upcoming} />
+                <MoviesList movies={props.upcoming} />
             );
         }
         return <Error text='Массив фильмов пуст' />;
     };
 
-    if(app.loading) {
+    if(props.loading) {
         return <Loader />
     }
 
@@ -52,7 +50,7 @@ const SoonPage = () => {
             <ReactPagination 
                 page={activePage}
                 func={changePage}
-                total={movies.total}
+                total={props.total}
             />
         </div>
     );

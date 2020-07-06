@@ -10,22 +10,19 @@ import Loader from '../../components/Loader/Loader';
 import { PAGE_SEARCH } from '../../constants/routers/routers';
 
 const MainPage = () => {
+    const dispatch = useDispatch();
 
-    const [search, setSearch] = useState('');
+    const props = useSelector((state) => ({
+        popular: state.prewievMovies.popular,
+        upcoming: state.prewievMovies.upcoming,
+        viewed: state.viewedMovies.viewed,
+        loading: state.appReducer.loading
+    }));
 
     let history = useHistory();
 
-    const dispatch = useDispatch();
-    const movies = useSelector((state) => ({
-        popular: state.prewievMovies.popular,
-        upcoming: state.prewievMovies.upcoming,
-        viewed: state.viewedMovies.viewed
-    }))
+    const [search, setSearch] = useState('');
 
-    const app = useSelector((state) => ({
-        loading: state.appReducer.loading
-    }));
-    
     useEffect(() => {
         dispatch(fetchPrewiev(POPULAR_MOVIES_URL, FETCH_POPULAR_PREVIEW))
         dispatch(fetchPrewiev(UPCOMING_MOVIES_URL, FETCH_UPCOMING_PREVIEW))
@@ -43,11 +40,11 @@ const MainPage = () => {
     };
 
     const renderPopularWidget = () => {
-        if (movies.popular.length) {
+        if (props.popular.length) {
             return (
                 <PreviewWidget
                     title='Популярное'
-                    movies={movies.popular} 
+                    movies={props.popular} 
                 />
             );
         }
@@ -55,11 +52,11 @@ const MainPage = () => {
     };
 
     const renderUpcomingWidget = () => {
-        if (movies.upcoming.length) {
+        if (props.upcoming.length) {
             return (
                 <PreviewWidget 
                     title='Скоро в кинотеартах' 
-                    movies={movies.upcoming} 
+                    movies={props.upcoming} 
                 />
             );
         }
@@ -67,8 +64,8 @@ const MainPage = () => {
     };
 
     const renderViewedWidget = () => {
-        const lastViewed = fromTheEnd(movies.viewed, -6);
-        if (movies.viewed.length) {
+        const lastViewed = fromTheEnd(props.viewed, -6);
+        if (props.viewed.length) {
             return (
                 <PreviewWidget 
                     title='Просмотренные' 
@@ -79,7 +76,7 @@ const MainPage = () => {
         return null;
     };
 
-    if (app.loading) {
+    if (props.loading) {
         return <Loader />
     }
 
@@ -91,11 +88,11 @@ const MainPage = () => {
                     type='text'
                     name='search' 
                     value={search}
-                    onChange={(event) => setSearch(event.target.value)} 
+                    onChange={(e) => setSearch(e.target.value)} 
                 />
                 <button
                     className='main-page__button-search'
-                    onClick={() => onSearch()}
+                    onClick={onSearch}
                 >
                     Поиск
                 </button>
@@ -111,48 +108,3 @@ const MainPage = () => {
 }
 
 export default MainPage;
-
-// MainPage.propTypes = {
-//     title: PropTypes.string,
-//     upcoming: PropTypes.arrayOf(
-//         PropTypes.shape({
-//             date: PropTypes.object,
-//             page: PropTypes.number,
-//             total_results: PropTypes.number,
-//             total_pages: PropTypes.number,
-//             results: PropTypes.arrayOf
-//         })
-//     ),
-//     popular: PropTypes.arrayOf(
-//         PropTypes.shape({
-//             page: PropTypes.number,
-//             total_results: PropTypes.number,
-//             total_pages: PropTypes.number,
-//             results: PropTypes.arrayOf
-//         })
-//     ),
-//     viewed: PropTypes.arrayOf(
-//         PropTypes.shape({
-//             src: PropTypes.string,
-//             id: PropTypes.id
-//         })
-//     ),
-//     results: PropTypes.arrayOf(
-//         PropTypes.shape({
-//             popularity: PropTypes.number,
-//             vote_count: PropTypes.number,
-//             video: PropTypes.bool,
-//             poster_path: PropTypes.string,
-//             id: PropTypes.number,
-//             adult: PropTypes.bool,
-//             backdrop_path: PropTypes.string,
-//             original_language: PropTypes.string,
-//             original_title: PropTypes.string,
-//             genre_ids: PropTypes.array,
-//             title: PropTypes.string,
-//             vote_average: PropTypes.number,
-//             overview: PropTypes.string,
-//             release_date: PropTypes.string
-//         })
-//     )
-// };
