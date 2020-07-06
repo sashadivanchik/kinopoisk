@@ -2,10 +2,15 @@ import {
   ADD_VIEWED_MOVIES, SHOW_LOADER, HIDE_LOADER, 
 } from '../types/constants';
 
+import noPoster from '../../static/images/no-poster.jpg';
+
 export const IMAGE_PATH = `https://image.tmdb.org/t/p/w500`;
 
 const getImageURL = path => {
-  return `${IMAGE_PATH}${path}`;
+  if (path) {
+    return `${IMAGE_PATH}${path}`;
+  } 
+  return noPoster;
 };
 
 export const showLoader = () => {

@@ -32,11 +32,26 @@ const MainPage = () => {
         return array.slice(value)
     };
 
-    const onSearch = () => {      
-        if (search) {
+    const onSearch = () => {
             history.push(`${PAGE_SEARCH}?search=${search}`);
-            setSearch('');
-        }       
+            setSearch('');   
+    };
+
+    const onSearchKeyPress = (event) => {
+        if (search === '') {
+            return;
+        }
+
+        if (event.key === 'Enter') {
+            onSearch()
+        }
+    };
+
+    const onSearchClick = () => {
+        if (search === '') {
+            return;
+        }
+        onSearch()
     };
 
     const renderPopularWidget = () => {
@@ -89,10 +104,11 @@ const MainPage = () => {
                     name='search' 
                     value={search}
                     onChange={(e) => setSearch(e.target.value)} 
+                    onKeyPress={onSearchKeyPress}
                 />
                 <button
                     className='main-page__button-search'
-                    onClick={onSearch}
+                    onClick={onSearchClick}
                 >
                     Поиск
                 </button>
