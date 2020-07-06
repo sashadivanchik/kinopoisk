@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import {useDispatch, useSelector} from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 
 import './PopularPage.scss';
 import { MoviesList } from '../../components/MoviesList/MoviesList';
@@ -12,12 +12,10 @@ import ReactPagination from '../../components/Pagination/Pagination';
 
 const PopularPage = () => {
     const dispatch = useDispatch();
-    const movies = useSelector((state) => ({
-        popular: state.popularMovies.popularList,
-        total: state.popularMovies.totalResults
-    }))
 
-    const app = useSelector((state) => ({
+    const props = useSelector((state) => ({
+        popular: state.popularMovies.popularList,
+        total: state.popularMovies.totalResults,
         loading: state.appReducer.loading
     }))
 
@@ -32,15 +30,15 @@ const PopularPage = () => {
     };
 
     const renderPopularList = () => {
-        if (movies.popular.length) {
+        if (props.popular.length) {
             return (
-                <MoviesList movies={movies.popular} />
+                <MoviesList movies={props.popular} />
             );
         }
         return <Error text='Массив фильмов пуст' />;
     };
 
-    if (app.loading) {
+    if (props.loading) {
         return <Loader />
     }
 
@@ -52,22 +50,10 @@ const PopularPage = () => {
             <ReactPagination 
                 page={activePage}
                 func={changePage}
-                total={movies.total}
+                total={props.total}
             />
         </div>
     );
 }
 
 export default PopularPage;
-
-// PopularPage.propTypes = {
-//     title: PropTypes.string,
-//     movies: PropTypes.arrayOf(
-//         PropTypes.shape({
-//             page: PropTypes.number,
-//             total_results: PropTypes.number,
-//             total_pages: PropTypes.number,
-//             results: PropTypes.arrayOf
-//         })
-//     )
-// };

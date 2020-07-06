@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import {useLocation} from 'react-router-dom';
+import { useLocation } from 'react-router-dom';
 import { searchMovie } from '../../store/actions/actions';
 import { FETCH_SEARCH_MOVIE } from '../../store/types/constants';
 import Loader from '../../components/Loader/Loader';
@@ -11,20 +11,13 @@ import ReactPagination from '../../components/Pagination/Pagination';
 const ResultPage = () => {
   const dispatch = useDispatch();
 
-  const movies = useSelector((state) => ({
+  const props = useSelector((state) => ({
     results: state.searchMovie.resultsSearch,
-    total: state.searchMovie.totalResults
-  }))
-
-  const app = useSelector((state) => ({
+    total: state.searchMovie.totalResults,
     loading: state.appReducer.loading
   }))
 
   const [activePage, setPage] = useState(1);
-
-  const changePage = (activePage) => {
-    setPage(activePage)
-};
 
   const useQuery = () => {
     return new URLSearchParams(useLocation().search);
@@ -32,20 +25,24 @@ const ResultPage = () => {
 
   let search = useQuery().get('search');
 
+  const changePage = (activePage) => {
+    setPage(activePage)
+  };
+
   useEffect(() => {
     dispatch(searchMovie(FETCH_SEARCH_MOVIE, search, activePage))
   }, [search, activePage]) 
 
   const renderSearchList = () => {
-    if (movies.results.length) {
+    if (props.results.length) {
         return (
-            <MoviesList movies={movies.results} />
+            <MoviesList movies={props.results} />
         );
     }
     return <Error text='Массив фильмов пуст' />;
 };
 
-  if (app.loading) {
+  if (props.loading) {
     return <Loader />
   }
 
@@ -57,7 +54,7 @@ const ResultPage = () => {
       <ReactPagination 
           page={activePage}
           func={changePage}
-          total={movies.total}
+          total={props.total}
       />
   </div>
   )

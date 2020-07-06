@@ -1,6 +1,4 @@
 import React, { useState } from 'react';
-// import RegistrationModal from '../../modals/RegistrationModal';
-// import { Registration } from '../Registration/Registration';
 
 import '../../modals/RegistrationModal/RegistrationModal.scss';
 import './EnterRegistration.scss';

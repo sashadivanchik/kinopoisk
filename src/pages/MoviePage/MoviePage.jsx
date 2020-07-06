@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
-import {NavLink} from 'react-router-dom';
-import {useParams} from 'react-router-dom';
-import {useDispatch, useSelector} from 'react-redux';
+import { NavLink } from 'react-router-dom';
+import { useParams } from 'react-router-dom';
+import { useDispatch, useSelector } from 'react-redux';
 
 import './MoviePage.scss';
 import { fetchMovie } from '../../store/actions/actions';
@@ -11,13 +11,11 @@ import { PAGE_MAIN } from '../../constants/routers/routers';
 
 const MoviePage = () => {
   const dispatch = useDispatch();
-  const movie = useSelector((state) => ({
-    movieInfo: state.moviePage.movieInfo
-  }));
 
-  const app = useSelector((state) => ({
+  const props = useSelector((state) => ({
+    movieInfo: state.moviePage.movieInfo,
     loading: state.appReducer.loading
-}));
+  }));
 
   let { id } = useParams();
 
@@ -35,7 +33,7 @@ const MoviePage = () => {
       </li>))
   };
 
-  if (app.loading) {
+  if (props.loading) {
     return <Loader />
   }
 
@@ -45,7 +43,7 @@ const MoviePage = () => {
     genres, 
     release, 
     posterPath 
-  } = movie.movieInfo;
+  } = props.movieInfo;
   
   return (   
     <div className='movie-page'>

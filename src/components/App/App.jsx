@@ -7,9 +7,15 @@ import MainPage from '../../pages/MainPage/MainPage';
 import PopularPage from '../../pages/PopularPage/PopularPage';
 import SoonPage from '../../pages/SoonPage/SoonPage';
 import ViewedPage from '../../pages/ViewedPage/ViewedPage';
-import { PAGE_MAIN, PAGE_POPULAR, PAGE_SOON, PAGE_VIEWED, PAGE_MOVIE, PAGE_SEARCH } from '../../constants/routers/routers';
+import { 
+    PAGE_MAIN, 
+    PAGE_POPULAR, 
+    PAGE_SOON, 
+    PAGE_VIEWED, 
+    PAGE_MOVIE, 
+    PAGE_SEARCH } from '../../constants/routers/routers';
 import MoviePage from '../../pages/MoviePage/MoviePage';
-import ResultPage from '../../pages/ResultsPage';
+import ResultPage from '../../pages/ResultsPage/ResultsPage';
 
 const App = () => {
     return (
