@@ -5,6 +5,7 @@ import {popularMovies} from './popularMovies'
 import {upcomingMovies} from './upcomingMovies';
 import {appReducer} from './appReducer';
 import {moviePage} from './moviePage';
+import {searchMovie} from './searchMovie';
 
 const reducers = {
   prewievMovies,
@@ -12,7 +13,8 @@ const reducers = {
   popularMovies,
   upcomingMovies,
   appReducer,
-  moviePage
+  moviePage,
+  searchMovie
 };
 
 const rootReducer = combineReducers(reducers);

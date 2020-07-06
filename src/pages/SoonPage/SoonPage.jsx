@@ -46,9 +46,6 @@ const SoonPage = () => {
 
     return (
         <div className='soon-page'>
-            <h1 className='soon-page__title'>
-                Скоро в кинотеатрах
-            </h1>
             <div className='soon-page__container'>
                 {renderSoonList()}
             </div>
