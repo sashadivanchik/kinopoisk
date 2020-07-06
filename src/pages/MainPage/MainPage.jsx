@@ -1,13 +1,20 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+import { useHistory } from 'react-router-dom';
 import './MainPage.scss';
 import { fetchPrewiev } from '../../store/actions/actions';
 import { PreviewWidget } from '../../components/PreviewWidget/PreviewWidget';
 import { POPULAR_MOVIES_URL, UPCOMING_MOVIES_URL } from '../../api/constants';
 import { FETCH_POPULAR_PREVIEW, FETCH_UPCOMING_PREVIEW } from '../../store/types/constants';
 import Loader from '../../components/Loader/Loader';
+import { PAGE_SEARCH } from '../../constants/routers/routers';
 
 const MainPage = () => {
+
+    const [search, setSearch] = useState('');
+
+    let history = useHistory();
+
     const dispatch = useDispatch();
     const movies = useSelector((state) => ({
         popular: state.prewievMovies.popular,
@@ -26,6 +33,13 @@ const MainPage = () => {
 
     const fromTheEnd = (array, value) => {
         return array.slice(value)
+    };
+
+    const onSearch = () => {      
+        if (search) {
+            history.push(`${PAGE_SEARCH}?search=${search}`);
+            setSearch('');
+        }       
     };
 
     const renderPopularWidget = () => {
@@ -71,9 +85,21 @@ const MainPage = () => {
 
     return (
         <div className='main-page'>
-            <h1 className='main-page__title'>
-                Главная
-            </h1>
+            <div className='main-page__search'>
+                <input 
+                    className='main-page__input'
+                    type='text'
+                    name='search' 
+                    value={search}
+                    onChange={(event) => setSearch(event.target.value)} 
+                />
+                <button
+                    className='main-page__button-search'
+                    onClick={() => onSearch()}
+                >
+                    Поиск
+                </button>
+            </div>
             <div className='main-page__container'>
                 {renderPopularWidget()}
                 {renderUpcomingWidget()}

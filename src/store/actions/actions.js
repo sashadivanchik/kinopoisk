@@ -92,6 +92,33 @@ export const fetchMovie = (actionType, id) => {
   } 
 };
 
+export const searchMovie = (actionType, search, page) => {
+  return async (dispatch) => {
+    try {
+      dispatch(showLoader())
+      const responce = await fetch(`https://api.themoviedb.org/3/search/movie?api_key=84ecb8320b91dea5c8ff7bc8404b9b0c&query=${search}&page=${page}`);
+      const json = await responce.json();
+      const transformData = json.results.map(item => {
+        return {
+          id: item.id,
+          title: item.title,
+          posterPath: getImageURL(item.poster_path)
+        }
+      });
+      setTimeout(() => {
+        dispatch({ type: actionType,
+            payload: { 
+              transformData,
+              total: json.total_results
+            }})  
+        dispatch(hideLoader()); 
+      }, 2000)
+    } catch (e) {
+      console.error(e);
+    } 
+  } 
+};
+
 export const addInViewed = (movie) => {
   return {
     type: ADD_VIEWED_MOVIES,

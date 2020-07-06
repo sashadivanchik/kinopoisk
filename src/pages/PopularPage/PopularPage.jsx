@@ -46,9 +46,6 @@ const PopularPage = () => {
 
     return (
         <div className='popular-page'>
-            <h1 className='popular-page__title'>
-                Популярное
-            </h1>
             <div className='popular-page__container'>
                 {renderPopularList()}
             </div>

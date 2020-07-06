@@ -7,8 +7,9 @@ import MainPage from '../../pages/MainPage/MainPage';
 import PopularPage from '../../pages/PopularPage/PopularPage';
 import SoonPage from '../../pages/SoonPage/SoonPage';
 import ViewedPage from '../../pages/ViewedPage/ViewedPage';
-import { PAGE_MAIN, PAGE_POPULAR, PAGE_SOON, PAGE_VIEWED, PAGE_MOVIE } from '../../constants/routers/routers';
+import { PAGE_MAIN, PAGE_POPULAR, PAGE_SOON, PAGE_VIEWED, PAGE_MOVIE, PAGE_SEARCH } from '../../constants/routers/routers';
 import MoviePage from '../../pages/MoviePage/MoviePage';
+import ResultPage from '../../pages/ResultsPage';
 
 const App = () => {
     return (
@@ -40,6 +41,11 @@ const App = () => {
                     path={`${PAGE_MOVIE}:id`}
                 >
                     <MoviePage />
+                </Route>
+                <Route
+                    path={PAGE_SEARCH}
+                >
+                    <ResultPage />
                 </Route>
             </Switch>
         </div>
