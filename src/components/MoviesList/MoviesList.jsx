@@ -25,8 +25,7 @@ export const MoviesList = ({movies}) => {
                 >
                     <img
                         className={'movies-list__image'}
-                        src={
-                            item.src ||
+                        src={ 
                             item.posterPath
                         }
                         alt='баннер'
@@ -40,7 +39,7 @@ export const MoviesList = ({movies}) => {
     }
     return (
         <ul className={'movies-list'}>
-                {renderList(movies)}
+            {renderList(movies)}
         </ul>
     )
 };
