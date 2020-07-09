@@ -1,5 +1,5 @@
 import {  
-  ADD_VIEWED_MOVIES, SHOW_LOADER, HIDE_LOADER, 
+  ADD_VIEWED_MOVIES, SHOW_LOADER, HIDE_LOADER, CLEAR_VIEWED_MOVIES, 
 } from '../types/constants';
 
 import noPoster from '../../static/images/no-poster.jpg';
@@ -129,6 +129,15 @@ export const addInViewed = (movie) => {
     type: ADD_VIEWED_MOVIES,
     payload: {
       movie
+    }
+  }
+};
+
+export const clearViewedMovies = () => {
+  return {
+    type: CLEAR_VIEWED_MOVIES,
+    payload: {
+      clear: []
     }
   }
 };
