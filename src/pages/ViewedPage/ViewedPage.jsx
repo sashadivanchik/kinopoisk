@@ -1,13 +1,17 @@
-import React, {useState} from 'react';
-import {useSelector} from 'react-redux';
+import React, { useState } from 'react';
+import { useSelector, useDispatch } from 'react-redux';
 
 import './ViewedPage.scss';
 import { MoviesList } from '../../components/MoviesList/MoviesList';
 import ReactPagination from '../../components/Pagination/Pagination';
+import { clearViewedMovies } from '../../store/actions/actions';
 
 const ViewedPage = () => {
-    const movies = useSelector((state) => ({
-        viewed: state.viewedMovies.viewed
+    const dispatch = useDispatch();
+
+    const props = useSelector((state) => ({
+        viewed: state.viewedMovies.viewed,
+        loading: state.appReducer.loading
     }));
 
     const [activePage, setPage] = useState(1);
@@ -19,7 +23,11 @@ const ViewedPage = () => {
     };
 
     const getViewed = () => {       
-        return movies.viewed.slice(startIndex, startIndex + 20);
+        return props.viewed.slice(startIndex, startIndex + 20);
+    };
+
+    const clearViewed = () => {
+        dispatch(clearViewedMovies())
     };
 
     const renderViewedList = () => {
@@ -29,9 +37,9 @@ const ViewedPage = () => {
                 <MoviesList movies={viewed} />
             );
         }
-    };
+    };  
 
-    if (!movies.viewed.length) {
+    if (!props.viewed.length) {
         return <p 
                 className='viewed-page__notice'
             >
@@ -41,17 +49,22 @@ const ViewedPage = () => {
 
     return (
         <div className='viewed-page'>
-            <h1 className='viewed-page__title'>
-                Просмотренные
-            </h1>
+            {props.viewed && (
+                <button
+                    className='viewed-page__button-clear'
+                    onClick={clearViewed}
+                >
+                    Очистить список
+                </button>
+            )}
             <div className='viewed-page__container'>
                 {renderViewedList()}
             </div>
-            {movies.viewed.length >= 20 && (
+            {props.viewed.length >= 20 && (
                     <ReactPagination 
                         page={activePage}
                         func={changePage}
-                        total={movies.viewed.length}
+                        total={props.viewed.length}
                     />
             )}
         </div>

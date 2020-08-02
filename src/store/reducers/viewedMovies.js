@@ -1,4 +1,4 @@
-import { ADD_VIEWED_MOVIES } from '../types/constants';
+import { ADD_VIEWED_MOVIES, CLEAR_VIEWED_MOVIES } from '../types/constants';
 
 const initialState = {
   viewed: [],
@@ -17,7 +17,13 @@ export const viewedMovies = (state = initialState, action) => {
         ...state,
         viewed: [...viewed, movie]
       }
-    }     
+    } 
+    case CLEAR_VIEWED_MOVIES: {
+      const { clear } = action.payload;
+      return {
+        viewed: clear
+      }    
+    }  
     default: return state;
   }
 };

@@ -14,6 +14,6 @@ store.subscribe(() => {
     saveState({
         viewedMovies: state.viewedMovies
     }, 'viewedMovies');
-})
+});
 
 export default store;
